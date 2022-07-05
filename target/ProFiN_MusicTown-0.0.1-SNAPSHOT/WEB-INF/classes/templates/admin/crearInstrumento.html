@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hamburgers/1.2.1/hamburgers.css">
+    <link href="dist/hamburgers.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/admin.css">
+    <link rel="stylesheet" href="/css/login.css">
+    <title>Administración | Crear</title>
+</head>
+<body>
+    <div class="dashboard">
+        
+        <aside class="sidebar" th:fragment="menuAdmin">
+            <div class="contenedor-sidebar">
+                <h2>Music Town</h2>
+
+                <div class="cerrar-menu">
+                    <img src="assets/img/cerrar.svg" alt="img cerrar-menu" id="cerrar-menu">
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="/admin">Instrumentos</a>
+                <a href="usuarios.html">Usuarios</a>
+            </nav>
+
+            <div class="cerrar-sesion-mobile">
+                <a href="/logout" class="cerrar-sesion">Cerrar Sesión</a>
+            </div>
+        </aside>    
+    
+        <div class="principal">
+            <div class="barra-mobile">
+                <h1>Music Town</h1>
+                <div class="menu">
+                    <img src="/assets/img/menu.svg" alt="img menu" id="mobile-menu">
+                </div>
+            </div>
+            
+            <div class="barra">
+                <p>Hola: <span>Admin </span></p>
+            
+                <a href="/logout" class="cerrar-sesion">Cerrar Sesión</a>
+            </div>
+    
+            <div class="contenedor">
+                <section class="contenedorS">
+                    <h2>Agregar Nuevo Instrumento</h2>
+        			
+                    <div th:if="${error}!=null" class="card">
+                        <div class="card-body">
+                            <p class="error" th:text="${error}"></p>
+                        </div>
+                    </div> 
+        
+        
+                    <form class="contact-form" th:action="@{/admin/guardarProducto}" method="POST" enctype="multipart/form-data">
+                        <fieldset>
+                            <div class="contenedorDiv">
+                                <div class="campo">
+                                    <label for="">Nombre:</label>
+                                    <input
+                                        class="input" 
+                                        type="text" 
+                                        name="nombreProducto"  
+                                        placeholder="Nombre del instrumento"
+                                        title="El nombre de usuario sólo puede contener letras"
+                                        pattern="^[A-Za-zÑñÁáÉéÍíÓóÚúÜü\s]+$" 
+                                        required
+                                        spellcheck="false"
+                                        autocomplete="off"
+                                    />
+                                </div>
+                                 <div class="campo">
+                                    <label for="">Marca:</label>
+                                    <input
+                                        class="input" 
+                                        type="text" 
+                                        name="marcaProducto"  
+                                        placeholder="Marca del Instrumento"
+                                        title="La marca del producto sólo puede contener letras"
+                                        pattern="^[A-Za-zÑñÁáÉéÍíÓóÚúÜü\s]+$" 
+                                        required
+                                        spellcheck="false"
+                                        autocomplete="off"
+                                    />
+                                </div>
+                                <div class="campo">
+                                    <label for="">Precio:</label>
+                                    <input
+                                        class="input" 
+                                        type="number" 
+                                        name="precioProducto" 
+                                        placeholder="Precio del instrumento"
+                                        required
+                                    />
+                                </div>
+                                <div class="campo">
+                                    <label for="">Imagen:</label>
+                                    <input 
+                                        type="file" 
+                                        name="fotoProducto"
+                                        multiple
+                                        class="imagen"
+                                        required
+                                    /> 
+                                </div>
+                                <div class="campo">
+                                    <label for="">Unidades:</label>
+                                    <input 
+                                        type="number" 
+                                        name="cantidadProducto" 
+                                        class="unidades" 
+                                        placeholder="Cantidad de unidades"
+                                        required
+                                    />
+                                </div>
+                            </div>
+                            <div class="boton">
+                                <input type="submit" class="btnPrincipal" value="Crear Instrumento">
+                            </div>
+                        </fieldset>
+                    </form>
+                </section>
+            </div>
+    </div>
+
+    <script src="../../static/js/dashboard.js"></script>
+</body>
+</html>

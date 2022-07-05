@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/normalize.css">
+    <link rel="stylesheet" href="/css/skeleton.css">
+    <link rel="stylesheet" href="/css/estilo-catalogo.css">
+    <!-- <link rel="stylesheet" href="../../static/css/index.css"> -->
+    <title>Carrito</title>
+</head>
+<body>
+    <header class="header">
+        <nav th:insert="ThHtmls/partesComunes :: menuNavUsuario"></nav>
+    </header>
+    
+
+    <div id="hero">
+        <div class="container">
+            <div class="row">
+                <div class="six columns">
+                    <div class="contenido-hero">
+                        <h2>Busca tu instrumento favorito</h2>
+                        <p>Encuentra aqui los mejores precios</p>
+                        <form action="#" id="busqueda" method="post" class="formulario">
+                            <input class="u-full-width" type="text" 
+                            placeholder="Que te gustaria comprar"
+                            id="buscador"
+                            >
+                            <input type="submit" id="submit-buscador" class="submit-buscador">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+<div class="barra">
+<div class="container">
+    <div class="row">
+        <div class="four columns icono icono1">
+            <p>Seguridad 100 % garantizada<br>
+                Con 5 años de garantia
+            </p>
+        </div>
+        <div class="four columns icono icono2">
+            <p>Envios 100 % Gratis<br>
+                 a todo el pais
+            </p>
+        </div>
+        <div class="four columns icono icono3">
+            <p>Elegi tu medio de pago favorito<br>
+               Hasta 12 cuotas sin interes 
+            </p>
+        </div>
+    </div>
+</div>
+</div>
+
+<div id="lista-cafe" class="container">
+
+
+    <h1 id="encabezado" class="encabezado">Pedidos en linea</h1>
+
+    <div class="row">
+        <div class="four columns">
+            <div class="card" th:each="producto : ${listaProductos}">
+                <img th:src="@{/foto/mostrarFoto/} + ${producto.getFotoProducto().iterator().next().getId()}" th:alt="${producto.NombreProducto}" 
+                     th:value="${producto.IdProducto}" class="u-full-width">
+                <div class="info-card">
+                    <h4 th:text="${producto.NombreProducto}"></h4>
+                    <p th:text="${producto.getMarcaProducto().NombreMarca}"></p>
+                    <img src="imagenes/estrellas.png" alt="">
+                    <p class="precio" th:text="${producto.PrecioProducto}"><span class="u-pull-rigth">$15</span></p>
+                    <a href="#" 
+                       class="u-full-width button-primary button input agregar-carrito
+                       ">Agregar Al Carrito</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+    
+    
+    
+    <div class="cargaProductos">
+        <form th:action="@{/producto/guardarProducto}" method="POST" enctype="multipart/form-data">
+            <label>Producto:
+                <input type="Text" name="nombreProducto"><br>
+            </label>    
+            <label>Fotos :
+                <input type="file" multiple name="fotoProducto"><br>
+            </label>
+            <label>Cantidad de unidades :
+                <input type="number" name="cantidadProducto"><br>
+            </label>
+            <label>Precio :
+                <input type="number" name="precioProducto"><br>
+            </label>
+            <label>Marca :
+                <input type="Text" name="marcaProducto"><br>
+            </label>
+            <button type="submit">Cargar nuevo producto</button>
+        </form>
+    </div>
+
+<footer th:insert="ThHtmls/partesComunes::menuFooterUsuario"></footer>
+
+<script src="js/catalogo.js"></script>
+</body>
+
+</html>

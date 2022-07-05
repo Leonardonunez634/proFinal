@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Music Town</title>
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hamburgers/1.2.1/hamburgers.css">
+        <link href="dist/hamburgers.css" rel="stylesheet">
+        <script src="/js/menu-hamburguesa.js" defer></script>
+        <script src="/js/index.js" defer></script>
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+        <link rel="stylesheet" href="/css/index.css"> 
+    </head>
+    <body id="home" data-dark>
+        <header class="header">
+
+            <nav sec:authorize="!isAuthenticated()" th:insert="ThHtmls/partesComunes :: menuNavUsuario"></nav>
+            <nav sec:authorize="isAuthenticated()" th:insert="ThHtmls/partesComunesR :: menuNavUsuario"></nav>
+        </header>
+
+        <main class="main">
+            <section id="carrusel" class="carrusel" data-scroll-spy>
+                <div class="slider">   
+                    <div class="slider-slides">
+                        <!-- Div de mensajes -->
+                        <div th:if="${exito}!=null" class="card">
+                            <div class="card-body">
+                                <script type="text/javascript">swal({
+                                    title: "EXITO", 
+                                    icon: "success",
+                                    button: "Aceptar",
+                                    });
+                                </script>
+                            </div>
+                        </div>
+                        <!-- FIN Div de mensajes -->
+                        <div class="slider-slide active">
+                            <img src="/assets/img/fondo2.jpg" alt="fondo carrusel">
+                        </div>
+                        <div class="slider-slide">
+                            <img src="/assets/img/fondo4.jpg" alt="fondo carrusel">
+                        </div>
+                        <div class="slider-slide">
+                            <img src="/assets/img/fondo6.jpg" alt="fondo carrusel">
+                        </div>
+                        <div class="slider-slide">
+                            <img src="/assets/img/fondo7.jpg" alt="fondo carrusel">
+                        </div>
+                        <div class="slider-slide">
+                            <img src="/assets/img/fondo8.jpg" alt="fondo carrusel">
+                        </div>
+                        <div class="slider-slide">
+                            <img src="/assets/img/fondo5.jpg" alt="fondo carrusel">
+                        </div>
+                    </div>
+                    <div class="slider-btns">
+                        <a class="prev" href="#"><</a>
+                        <a class="next" href="#">></a></div>
+                </div>
+            </section>
+
+            <h2 class="cabecera">Catalogo</h2>
+            <section id="gallery" class="gallery">
+                <div class="container-img">
+                    <div class="box-img">
+                        <a href="google.com">
+                            <img src="/assets/img/gallery-flautas.jpg" class="gallery-img" alt="flautas">
+                            <p class="descripcion">Flautas</p>
+                        </a>
+                    </div>
+                    <div class="box-img">
+                        <a href="#">
+                            <img src="/assets/img/gallery-accesorios.jpg" class="gallery-img" alt="accesorios">
+                            <p class="descripcion">Accesorios</p>
+                        </a>
+                    </div>
+                    <div class="box-img">
+                        <a href="#">
+                            <img src="/assets/img/gallery-teclado.jpg" alt="teclado">
+                            <p class="descripcion">Teclados</p>
+                        </a>
+                    </div>
+                    <div class="box-img">
+                        <a href="#">
+                            <img src="/assets/img/gallery-guitar.jpg" class="gallery-img" alt="guitar">
+                            <p class="descripcion">Guitarras</p>
+                        </a>
+                    </div>
+                    <div class="box-img">
+                        <a href="#">
+                            <img src="/assets/img/gallery-bass.jpg" class="gallery-img" alt="bass">
+                            <p class="descripcion">Bajos</p>
+                        </a>
+                    </div>
+                    <div class="box-img">
+                        <a href="#">
+                            <img src="/assets/img/gallery-drum.jpg" class="gallery-img" alt="drum">
+                            <p class="descripcion">Baterias</p>
+                        </a>
+                    </div>
+                    <div class="box-img">
+                        <a href="#">
+                            <img src="/assets/img/gallery-trompet.jpg" class="gallery-img" alt="trompet">
+                            <p class="descripcion">Trompetas</p>
+                        </a>
+                    </div>
+                </div>
+            </section>
+            <h2 class="cabecera">Contacto</h2>
+            <section class="contact section" id="contact">
+                <div class="contact__container contenedor grid">
+                    <div class="contact__content">
+                        <form action="enviarMail" class="contact__form" method="POST">
+                            <div class="contact__form-div">
+                                <label for="" class="contact__form-tag">Nombre</label>
+                                <input name="nombre" type="text" placeholder="Ingresa tu nombre" spellcheck="false" class="contact__form-input">
+                            </div>
+
+                            <div class="contact__form-div">
+                                <label for="" class="contact__form-tag">Email</label>
+                                <input name="email" type="email" placeholder="Ingresa tu email" spellcheck="false" class="contact__form-input">
+                            </div>
+
+                            <div class="contact__form-div">
+                                <label for="" class="contact__form-tag">Asunto</label>
+                                <input name="asuntoMail" type="text" placeholder="Describi el asunto del email" spellcheck="false" class="contact__form-input">
+                            </div>
+                            <div class="contact__form-div contact__form-area">
+                                <label for="" class="contact__form-tag">Mensaje</label>
+                                <textarea name="contenidoMensaje" id="" cols="30" rows="10" placeholder="Ingresa tu mensaje" class="contact__form-input"></textarea>
+                            </div>
+
+                            <button class="button">Enviar</button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer th:insert="ThHtmls/partesComunes::menuFooterUsuario"></footer>
+
+        <script src="https://unpkg.com/boxicons@2.1.2/dist/boxicons.js"></script>
+        <script src="https://kit.fontawesome.com/c3d241543d.js" crossorigin="anonymous"></script>
+    </body>
+</html>

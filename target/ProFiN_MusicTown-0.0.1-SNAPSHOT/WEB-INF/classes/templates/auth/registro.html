@@ -1,0 +1,95 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hamburgers/1.2.1/hamburgers.css">
+    <link href="dist/hamburgers.css" rel="stylesheet">
+     <script src="/js/menu-hamburguesa.js" defer></script>
+    <script src="/js/formulario.js" defer></script>
+    <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="/css/login.css">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <title>Music Town | Registro</title>
+  </head>
+  <body>
+    <header class="header">
+        <nav th:insert="ThHtmls/partesComunes :: menuNavUsuario"></nav>
+    </header>
+    
+    <div class="contenedor">
+        <section class="contenedorS">
+            <h2>Formulario de Registro</h2>
+
+            <div th:if="${error}!=null" class="card">
+                <div class="card-body">
+                    <script type="text/javascript">
+                        swal({
+                            title: "ERROR",
+                            icon: "error",
+                            button: "Aceptar",
+                        });
+                    </script>
+                    <p class="error" th:text="${error}"></p>
+                </div>
+            </div> 
+
+
+            <form class="contact-form" action="registrar" method="POST" enctype="multipart/form-data">
+                <fieldset>
+                    <div class="contenedorDiv">
+                        <div class="campo">
+                            <label for="">Nombre de usuario:</label>
+                            <input
+                                class="input is-active" 
+                                type="text" 
+                                name="nombre"  
+                                placeholder="Nombre de usuario"
+                                title="Debe ingresar un formato valido para el nombre"
+                                pattern="^[A-Za-z0-9ÑñÁáÉéÍíÓóÚúÜü\s]+$" 
+                                required
+                                spellcheck="false"
+                                autocomplete="off"
+                            />
+                        </div>
+                        <div class="campo">
+                            <label for="">E-mail:</label>
+                            <input
+                                class="input" 
+                                type="email" 
+                                name="mail" 
+                                placeholder="Tu E-mail"
+                                title="Debe ingresar un formato correcto para el mail"
+                                pattern="^[a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,15})$"
+                                required
+                                spellcheck="false"
+                                autocomplete="off"
+                            />
+                        </div>
+                        <div class="campo">
+                            <label for="">Contraseña:</label>
+                            <input type="password" name="clave" class="password" placeholder="Tu Contraseña">
+                        </div>
+                        <div class="campo">
+                            <label for="">Repetir Contraseña:</label>
+                            <input type="password" name="clave1" class="password" placeholder="Repita su contraseña">
+                        </div>
+                    </div>
+                    <div class="boton">
+                        <input type="submit" value="Registrar" class="btnPrincipal" >
+                    </div>
+                    <div class="enlaceR">
+                        <div class="link">
+                            <a href="/iniciarSesion">¿Ya tengo cuenta?</a>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </section>
+    </div>
+
+    <script src="https://unpkg.com/boxicons@2.1.2/dist/boxicons.js"></script>
+  </body>
+</html>

@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: MusicTown.ver1.Ver1ApplicationTests
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 18.136 s - in MusicTown.ver1.Ver1ApplicationTests

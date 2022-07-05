@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hamburgers/1.2.1/hamburgers.css">
+        <link href="dist/hamburgers.css" rel="stylesheet">
+        <script src="/js/formulario.js" defer></script>
+        <link rel="stylesheet" href="/css/index.css">
+        <link rel="stylesheet" href="/css/pagos.css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+        <script src="jquery-3.6.0.min.js"></script>
+        <title>Music Town | Checkout</title>
+    </head>
+
+    <body>
+        <header class="header">
+            <nav th:insert="ThHtmls/partesComunes :: menuNavUsuario"></nav>
+        </header>
+
+        <section id="carrito">
+            <div class="container mt-5 py-1">
+                <h2 clas="font-weight-bold">Finalizar compra</h2>
+                <hr>
+            </div>
+        </section>
+
+        <section class="container">
+            <div class="form-container col-md-9 order-md-1">
+                <h4 class="mb-3">Datos del Comparador</h4>
+                <form class="form needs-validation" action="/pagos/process_payment" method="post" id="paymentForm" th:object="${pagoMPModel}">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="firstName">Nombre</label>
+                            <input type="text" class="form-control name" id="firstName" placeholder="" value="" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="lastName">Apellido</label>
+                            <input type="text" class="form-control name" id="lastName" placeholder="" value="" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="email">Email</label>
+                        <input type="email" class="form-control mail" th:field="*{email}" id="email" placeholder="tuemail@ejemplo.com">
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="docType">Tipo de Documento</label>
+                        <select class="custom-select d-block w-40" id="docType" name="docType" th:field="*{docType}"
+                                data-checkout="docType" type="text"></select>
+                    </div>
+
+                    <div class="form-group col-md-5 mb-3">
+                        <label for="docNumber">Número de Documento</label>
+                        <input class="form-control" id="docNumber" name="docNumber" th:field="*{docNumber}"
+                               data-checkout="docNumber" type="text" oninput="event.target.value = event.target.value.replace(/[^0-9]*/g,'');" maxlength="8" />
+                    </div>
+
+                    <h4 class="my-4">Datos de la tarjeta</h4>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3 form-group">
+                            <label for="cardholderName">Titular de la tarjeta</label>
+                            <input class="form-control" id="cardholderName" data-checkout="cardholderName" type="text" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="cardNumber">Número de la tarjeta</label>
+                            <input class="form-control" type="text" id="cardNumber" data-checkout="cardNumber"
+                                   onselectstart="return false" oncopy="return false" oncut="return false"
+                                   ondrag="return false" ondrop="return false" autocomplete=off
+                                   oninput="event.target.value = event.target.value.replace(/[^0-9]*/g,'');">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3 form-group">
+                            <label for="" class="d-block">Fecha de Vencimiento</label>
+                            <input class="form-control w-25 d-inline" type="text" placeholder="MM"
+                                   id="cardExpirationMonth" data-checkout="cardExpirationMonth"
+                                   onselectstart="return false" onpaste="return false" oncopy="return false"
+                                   oncut="return false" ondrag="return false" ondrop="return false" autocomplete=off
+                                   maxlength="2">
+                            <span class="date-separator">/</span>
+                            <input class="form-control w-25 d-inline" type="text" placeholder="AA"
+                                   id="cardExpirationYear" data-checkout="cardExpirationYear" onselectstart="return false"
+                                   onpaste="return false" oncopy="return false" oncut="return false" ondrag="return false"
+                                   ondrop="return false" autocomplete=off
+                                   maxlength="4">
+                        </div>
+                        <div class="col-md-3 mb-3 form-group">
+                            <label for="securityCode">CVV</label>
+                            <input class="form-control" id="securityCode" data-checkout="securityCode" type="password"
+                                   onselectstart="return false" onpaste="return false" oncopy="return false"
+                                   oncut="return false" ondrag="return false" ondrop="return false" autocomplete=off
+                                   oninput="event.target.value = event.target.value.replace(/[^0-9]*/g,'');" maxlength="4">
+                        </div>
+
+                        <div id="issuerInput" class="col-md-7 mb-3 form-group">
+                            <label for="issuer">Banco emisor</label>
+                            <select class="custom-select d-block w-50 select2" id="issuer" name="issuer" data-checkout="issuer"></select>
+                        </div>
+
+                        <div class="form-group col-md-7 mb-3 cuotes">
+                            <label for="installments">Cuotas</label>
+                            <select class="custom-select d-block w-50 select2" type="text" id="installments" th:field="*{installments}"
+                                    name="installments"></select>
+                        </div>
+                        <div class="form-group col-md-6 p-2 pay">
+                            <label for="securityCode">Monto a pagar</label>
+                            <input class="form-control" th:field="*{pagoManual}" type="number"
+                                   oninput="event.target.value = event.target.value.replace(/[^0-9]*/g,'');" />
+                        </div>
+
+                        <div class="form-group">
+                            <input class="form-control" type="hidden" name="transactionAmount"
+                                   th:field="*{transactionAmount}" id="transactionAmount" />
+                            <input class="form-control" type="hidden" name="paymentMethodId" th:field="*{paymentMethodId}"
+                                   id="paymentMethodId" />
+                            <input class="form-control" type="hidden" name="description" th:field="*{description}"
+                                   id="description" />
+
+                            <br>
+                            <hr class="mb-4">
+                            <button type="submit" class="ml-auto mb-3 boton">Pagar</button>
+                            <br>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer th:insert="ThHtmls/partesComunes::menuFooterUsuario"></footer>
+    <footer th:fragment="menuFooterUsuario">
+
+        <script src="https://unpkg.com/boxicons@2.1.2/dist/boxicons.js"></script>
+        <script src="https://secure.mlstatic.com/sdk/javascript/v1/mercadopago.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+        <script>
+            //MERCADO PAGO
+            window.Mercadopago.setPublishableKey("TEST-08e4feb9-ea0d-4b95-b2d9-4dbc309a0a17");
+            // window.Mercadopago.setPublishableKey("TEST-94bc56b3-1377-4504-9e0a-25b51fbde5ab");
+            window.Mercadopago.getIdentificationTypes();
+            document.getElementById('cardNumber').addEventListener('change', guessPaymentMethod);
+
+            function getIssuers(paymentMethodId) {
+            window.Mercadopago.getIssuers(
+            paymentMethodId,
+            setIssuers
+            );
+            }
+
+            function setIssuers(status, response) {
+            if (status == 200) {
+            let issuerSelect = document.getElementById('issuer');
+            response.forEach(issuer => {
+            let opt = document.createElement('option');
+            opt.text = issuer.name;
+            opt.value = issuer.id;
+            issuerSelect.appendChild(opt);
+            });
+
+            getInstallments(
+            document.getElementById('paymentMethodId').value,
+            document.getElementById('transactionAmount').value,
+            issuerSelect.value
+            );
+            } else {
+            alert(`issuers method info error: ${response}`);
+            }
+            }
+
+            function guessPaymentMethod(event) {
+            let cardnumber = document.getElementById("cardNumber").value;
+            if (cardnumber.length >= 6) {
+            let bin = cardnumber.substring(0, 6);
+            window.Mercadopago.getPaymentMethod({
+            "bin": bin
+            }, setPaymentMethod);
+            }
+            };
+
+            function setPaymentMethod(status, response) {
+            if (status == 200) {
+            let paymentMethod = response[0];
+            document.getElementById('paymentMethodId').value = paymentMethod.id;
+
+            getIssuers(paymentMethod.id);
+            } else {
+            alert(`payment method info error: ${response}`);
+            }
+            }
+
+            doSubmit = false;
+            document.getElementById('paymentForm').addEventListener('submit', getCardToken);
+            function getCardToken(event) {
+            event.preventDefault();
+            if (!doSubmit) {
+            let $form = document.getElementById('paymentForm');
+            window.Mercadopago.createToken($form, setCardTokenAndPay);
+            return false;
+            }
+            };
+
+            function setCardTokenAndPay(status, response) {
+            if (status == 200 || status == 201) {
+
+            let form = document.getElementById('paymentForm');
+            let card = document.createElement('input');
+            card.setAttribute('name', 'token');
+            card.setAttribute('type', 'hidden');
+            card.setAttribute('value', response.id);
+            form.appendChild(card);
+            doSubmit = true;
+            form.submit();
+
+            } else {
+            console.log("Verify filled data!\n" + JSON.stringify(response, null, 4));
+
+            }
+
+            }
+
+            function getInstallments(paymentMethodId, transactionAmount, issuerId) {
+            window.Mercadopago.getInstallments({
+            "payment_method_id": paymentMethodId,
+            "amount": parseFloat(transactionAmount),
+            "issuer_id": parseInt(issuerId)
+            }, setInstallments);
+            }
+
+            function setInstallments(status, response) {
+            if (status == 200) {
+            document.getElementById('installments').options.length = 0;
+            response[0].payer_costs.forEach(payerCost => {
+            let opt = document.createElement('option');
+            opt.text = payerCost.recommended_message;
+            opt.value = payerCost.installments;
+            document.getElementById('installments').appendChild(opt);
+            });
+
+            } else {
+            alert(`installments method info error: ${response}`);
+            }
+            }
+            //FIN MERCADO PAGO
+
+        </script>
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+
+</body>
+
+</html>
