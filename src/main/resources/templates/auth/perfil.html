@@ -1,0 +1,89 @@
+
+!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hamburgers/1.2.1/hamburgers.css">
+    <link href="dist/hamburgers.css" rel="stylesheet">
+    <script src="/js/menu-hamburguesa.js" defer></script>
+    <script src="/js/formulario.js" defer></script>
+    <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="/css/login.css">
+    <title>Music Town | Modificar Usuario</title>
+  </head>
+  <body>
+    <header class="header">
+        <nav th:insert="ThHtmls/partesComunes :: menuNavUsuario"></nav>
+    </header>
+    
+    <div class="contenedor">
+        <section class="contenedorS">
+            <h2>Modificar Usuario</h2>
+
+            <div th:if="${error}!=null" class="card">
+                <div class="card-body">
+                    <p class="error" th:text="${error}"></p>
+                </div>
+            </div> 
+
+
+            <form class="contact-form" th:action="@{actualizar-perfil}" method="POST" enctype="multipart/form-data">
+                <fieldset>
+                    <div class="contenedorDiv">
+                        <div class="campo">
+                            <label for="">Nombre de usuario:</label>
+                            <input
+                                class="input is-active" 
+                                type="text" 
+                                name="nombre" 
+                                th:value="${usuarioMostrar.nombre}"
+                                placeholder="Tu usuario"
+                                title="El nombre de usuario sólo puede contener letras"
+                                spellcheck="false"
+                                autocomplete="off"
+                            />
+                        </div>
+                        <div class="campo">
+                            <label for="">E-mail:</label>
+                            <input
+                                class="input" 
+                                type="email" 
+                                name="mail" 
+                                placeholder="Tu email"
+                                title="Debe ingresar un formato correcto para el mail"
+                                th:value="${usuarioMostrar.mail}"
+                                spellcheck="false"
+                                autocomplete="off"
+                            />
+                        </div>
+                        <div class="campo">
+                            <label for="">Contraseña:</label>
+                            <input type="password" 
+                                   name="clave" 
+                                   class="password" 
+                                   placeholder="Tu Contraseña"
+                                   th:value="${clave}">
+                        </div>
+                        <div class="campo">
+                            <label for="">Repetir Contraseña:</label>
+                            <input type="password" 
+                                   name="clave1" 
+                                   class="password" 
+                                   placeholder="Repita su contraseña"
+                                   th:value="${clave1}"
+                                   >
+                        </div>
+                    </div>
+                    <div class="boton">
+                        <input type="submit" class="btnPrincipal" value="Modificar">
+                    </div>
+                </fieldset>
+            </form>
+        </section>
+    </div>
+
+    <script src="https://unpkg.com/boxicons@2.1.2/dist/boxicons.js"></script>
+  </body>
+</html>

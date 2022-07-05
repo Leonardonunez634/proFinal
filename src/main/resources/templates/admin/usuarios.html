@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hamburgers/1.2.1/hamburgers.css">
+    <link href="dist/hamburgers.css" rel="stylesheet">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js" defer></script>
+    <script src="/js/alertas.js" defer></script>
+    <link rel="stylesheet" href="/css/admin.css">
+   
+
+    <title>Administración</title>
+</head>
+<body>
+    <div class="dashboard">
+        
+        <aside th:insert="ThHtmls/partesComunes :: menuAdmin"></aside>
+        <aside class="sidebar" th:fragment="menuAdmin">
+            <div class="contenedor-sidebar">
+                <h2>Music Town</h2>
+
+                <div class="cerrar-menu">
+                    <img src="assets/img/cerrar.svg" alt="img cerrar-menu" id="cerrar-menu">
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="instrumentos.html">Instrumentos</a>
+                <a href="usuarios.html">Usuarios</a>
+            </nav>
+
+            <div class="cerrar-sesion-mobile">
+                <a href="/logout" class="cerrar-sesion">Cerrar Sesión</a>
+            </div>
+        </aside>    
+    
+        <div class="principal">
+            <div class="barra-mobile">
+                <h1>Music Town</h1>
+                <div class="menu">
+                    <img src="/assets/img/menu.svg" alt="img menu" id="mobile-menu">
+                </div>
+            </div>
+            
+            <div class="barra">
+                <p>Hola: <span>Admin </span></p>
+            
+                <a href="/logout" class="cerrar-sesion">Cerrar Sesión</a>
+            </div>
+    
+            <div class="contenido">
+                <h2 class="nombre-pagina">Administración Usuarios</h2>
+
+                <table class="usuarios">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Correo</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+            
+                    <tbody> <!-- Mostrar Resultados  -->
+                        <tr>
+                            <td>123</td>
+                            <td>Juan</td>
+                            <td>juan@guitar.com</td>
+                            <td>
+                                <a href="#" onclick="eliminar()" class="btn elim">Eliminar</a>
+                                <a href="actualizar.html" class="btn act">Actualizar</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>123</td>
+                            <td>Pepe</td>
+                            <td>Ppepe@guitar.com</td>
+                            <td>
+                                <a href="#" onclick="eliminar()" class="btn elim">Eliminar</a>
+                                <a href="actualizar.html" class="btn act">Actualizar</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/dashboard.js"></script>
+</body>
+</html>

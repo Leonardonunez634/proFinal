@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hamburgers/1.2.1/hamburgers.css">
+    <link href="dist/hamburgers.css" rel="stylesheet">
+    <script src="js/index.js" defer></script>
+    <script src="js/include-html.js"></script>
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/login.css">
+    <title>Music Town</title>
+  </head>
+  <body>
+    <header class="header">
+
+        <nav class="nav">
+            <a href="../index.html"><img class="logo" src="./assets/img/logo.png" alt="logo"></a>
+            <div class="container-title"></div>
+                <div class="title">
+                    <a href="index.html"><h1>Music Town</h1></a>
+                </div>    
+            </div>
+            <button class="nav-toggle hamburger hamburger--collapse" type="button" aria-label="Abrir menú">
+                <span class="hamburger-box">
+                    <span class="hamburger-inner"></span>
+                  </span>
+            </button>
+        
+            <ul class="nav-menu">
+                <li class="nav-menu-item"><a href="#hola" class="nav-menu-link nav-link">Catalogo</a></li>
+                <li class="nav-menu-item"><a href="login.html" class="nav-menu-link nav-link">Contacto</a></li>
+                <li class="nav-menu-item"><a href="login.html" class="nav-menu-link nav-link">Iniciar Sesión</a></li>
+                <li class="nav-menu-item"><a href="carrito.html" class="nav-menu-link nav-link carrito"><box-icon name='cart' type='solid' ></box-icon></a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <div class="contenedor">
+        <section class="contenedorS">
+            <h2>Formulario de Registro</h2>
+
+            <div th:if="${error}!=null" class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Error</h5>
+                    <p class="card-text" th:text="${error}">No esxiste el usuario</p>
+                </div>
+            </div>
+
+            <form action="" method="POST" class="form" enctype="multipart/form-data">
+                <fieldset>
+                    <div class="contenedorDiv">
+                        <div class="campo">
+                            <label for="">Nombre:</label>
+                            <input 
+                                type="text" 
+                                name="nombre"  
+                                placeholder="Tu Nombre"
+                                title="El nombre sólo puede contener letras y espacios en blanco"
+                                pattern="^[A-Za-zÑñÁáÉéÍíÓóÚúÜü\s]+$"
+                                required
+                                spellcheck="false"
+                            />
+                        </div>
+                        <div class="campo">
+                            <label for="">E-mail:</label>
+                            <input 
+                                type="email" 
+                                name="email" 
+                                placeholder="Tu E-mail"
+                                title="Debe ingresar un formato correcto para el mail"
+                                pattern="^[a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,15})$"
+                                required
+                                spellcheck="false"
+                            />
+                        </div>
+                        <div class="campo">
+                            <label for="">Contraseña:</label>
+                            <input type="password" name="password" class="password" placeholder="Tu Contraseña">
+                        </div>
+                        <div class="campo">
+                            <label for="">Repetir Contraseña:</label>
+                            <input type="password" name="password" class="password" placeholder="Repita su contraseña">
+                        </div>
+                    </div>
+                    <div class="boton">
+                        <input type="submit" class="btnPrincipal" value="Resgistrar">
+                    </div>
+                    <div class="enlaces">
+                        <h3 class="link"><a href="login.html">¿Ya tengo cuenta?</a></h3>
+                    </div>
+                </fieldset>
+            </form>
+        </section>
+    </div>
+
+    <div data-include="assets/footer.html"></div>
+
+    <script src="https://unpkg.com/boxicons@2.1.2/dist/boxicons.js"></script>
+  </body>
+</html>

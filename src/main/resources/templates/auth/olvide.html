@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hamburgers/1.2.1/hamburgers.css">
+    <link href="dist/hamburgers.css" rel="stylesheet">
+    <script src="js/index.js" defer></script>
+
+    <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="/css/login.css">
+
+    <title>Music Town | Olvidé</title>
+  </head>
+  <body>
+    <header class="header">
+        <nav th:insert="ThHtmls/partesComunes :: menuNavUsuario"></nav>
+    </header>
+    
+    <div class="contenedor">
+        <section class="contenedorS">
+            <h2>Recuperar Contraseña</h2>
+
+            <div th:if="${error}!=null" class="card">
+                <div class="card-body">
+                    <p class="error" th:text="${error}"></p>
+                </div>
+            </div> 
+
+            <form action="/olvide" method="POST" class="form" enctype="multipart/form-data">
+                <fieldset>
+                    <div class="contenedorDiv">
+                        <div class="campo">
+                            <label for="">E-mail:</label>
+                            <input 
+                                type="email" 
+                                name="email" 
+                                placeholder="Tu E-mail"
+                                title="Debe ingresar un formato correcto para el mail"
+                                pattern="^[a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,15})$"
+                                required
+                                spellcheck="false"
+                            />
+                        </div>
+                    </div>
+                    <div class="boton">
+                        <input type="submit" class="btnPrincipal" value="Enviar">
+                    </div>
+                    <div class="enlaces">
+                        <div class="link">
+                            <a href="/iniciarSesion">¿Ya tengo cuenta?</a>
+                        </div>
+                        <div class="link">
+                            <a href="/registrar">¿No tienes cuenta?</a>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </section>
+    </div>
+
+    <footer th:insert="ThHtmls/partesComunes::menuFooterUsuario"></footer>
+   
+    <script src="https://kit.fontawesome.com/c3d241543d.js" crossorigin="anonymous"></script>
+  </body>
+</html>

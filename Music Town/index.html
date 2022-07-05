@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Town</title>
+    <script src="https://kit.fontawesome.com/7e5b2d153f.js"crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hamburgers/1.2.1/hamburgers.css">
+    <link href="dist/hamburgers.css" rel="stylesheet">
+    <script src="js/index.js" defer></script>
+    <script src="js/include-html.js"></script>
+    <link rel="stylesheet" href="css/index.css">
+
+</head>
+<body id="home" data-dark>
+  <header class="header">
+
+    <nav class="nav">
+        <a href="../index.html"><img class="logo" src="./assets/img/logo.png" alt="logo"></a>
+        <div class="container-title"></div>
+            <div class="title">
+                <a href="index.html"><h1>Music Town</h1></a>
+            </div>    
+        </div>
+        <button class="nav-toggle hamburger hamburger--collapse" type="button" aria-label="Abrir menú">
+            <span class="hamburger-box">
+                <span class="hamburger-inner"></span>
+              </span>
+        </button>
+    
+        <ul class="nav-menu">
+            <li class="nav-menu-item"><a href="#hola" class="nav-menu-link nav-link">Catalogo</a></li>
+            <li class="nav-menu-item"><a href="login.html" class="nav-menu-link nav-link">Contacto</a></li>
+            <li class="nav-menu-item"><a href="login.html" class="nav-menu-link nav-link">Iniciar Sesión</a></li>
+            <li class="nav-menu-item"><a href="carrito.html" class="nav-menu-link nav-link carrito"><box-icon name='cart' type='solid' ></box-icon></a></li>
+        </ul>
+    </nav>
+</header>
+
+   
+    <main class="main">
+        <section id="carrusel" class="carrusel" data-scroll-spy>
+            <div class="slider">
+              <div class="slider-slides">
+                <div class="slider-slide active">
+                  <img src="./assets/img/fondo2.jpg" alt="animals">
+                </div>
+                <div class="slider-slide">
+                  <img src="./assets/img/fondo4.jpg" alt="tech">
+                </div>
+                <div class="slider-slide">
+                  <img src="./assets/img/fondo6.jpg" alt="nature">
+                </div>
+                <div class="slider-slide">
+                  <img src="./assets/img/fondo7.jpg" alt="People">
+                </div>
+                <div class="slider-slide">
+                  <img src="./assets/img/fondo8.jpg" alt="People">
+                </div>
+                <div class="slider-slide">
+                  <img src="./assets/img/fondo5.jpg" alt="People">
+                </div>
+            </div>
+              <div class="slider-btns">
+                <a class="prev" href="#"><</a>
+                <a class="next" href="#">></a></div>
+            </div>
+          </section>
+
+          <h2 class="cabecera">Catalogo</h2>
+          <section id="gallery" class="gallery">
+            <div class="container-img">
+              <div class="box-img">
+                <a href="google.com">
+                    <img src="./assets/img/gallery-flautas.jpg" class="gallery-img" alt="flautas">
+                </a>
+              </div>
+              <div class="box-img">
+                <a href="#">
+                  <figure>
+                    <img src="./assets/img/gallery-accesorios.jpg" class="gallery-img" alt="accesorios">
+                  </figure>
+                </a>
+              </div>
+              <div class="box-img">
+                <a href="#">
+                  <figure>
+                    <img src="./assets/img/gallery-teclado.jpg" alt="teclado">
+                  </figure>
+                </a>
+              </div>
+              <div class="box-img">
+                <a href="#">
+                  <figure>
+                    <img src="./assets/img/gallery-guitar.jpg" class="gallery-img" alt="guitar">
+                  </figure>
+                </a>
+              </div>
+              <div class="box-img">
+                <a href="#">
+                  <figure>
+                    <img src="./assets/img/gallery-bass.jpg" class="gallery-img" alt="bass">
+                  </figure>
+                </a>
+              </div>
+              <div class="box-img">
+                <a href="#">
+                  <figure>
+                    <img src="./assets/img/gallery-drum.jpg" class="gallery-img" alt="drum">
+                  </figure>
+                </a>
+              </div>
+              <div class="box-img">
+                <a href="#">
+                  <figure>
+                    <img src="./assets/img/gallery-trompet.jpg" class="gallery-img" alt="trompet">
+                  </figure>
+                </a>
+              </div>
+            </div>
+
+        </section>
+       
+
+    </main>
+    <div data-include="assets/footer.html"></div>
+    
+    <script src="https://unpkg.com/boxicons@2.1.2/dist/boxicons.js"></script>
+</body>
+</html>

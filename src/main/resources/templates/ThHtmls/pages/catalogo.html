@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Pagina de ventas</title>
+        <link rel="stylesheet" type="text/css" href="Style.css">
+    </head>
+    <body>
+        <header>
+            <nav th:insert="ThHtmls/partesComunes :: menuNavUsuario"></nav>
+        </header>
+        <div th:if="${error}!=null" class="card">
+                <div class="card-body">
+                    <p class="error" th:text="${error}"></p>
+                </div>
+            </div>
+        <h1 class="Tlo"><a href="/paginaVentas">Catalogo de productos</a></h1>
+        <div class="Contenedor_productos" >
+            <div th:each="producto : ${listaProductos}">
+                <div class="productoUnico">
+                    <img th:src="@{foto/mostrarFoto/} + ${producto.getFotoProducto().iterator().next().getId()}">
+                    <p th:text="${producto.NombreProducto}"></p>
+                    <p th:text="${producto.PrecioProducto}"></p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Parte que solo se muestra a un usuario Ingresado-->
+        <!-- Carga de productos-->
+        <div class="cargaProductos">
+            <form th:action="@{/guardarProducto}" method="POST" enctype="multipart/form-data">
+                <label>Producto:
+                    <input type="Text" name="nombreProducto"><br>
+                </label>    
+                <label>Fotos :
+                    <input type="file" multiple name="fotoProducto"><br>
+                </label>
+                <label>Cantidad de unidades :
+                    <input type="number" name="cantidadProducto"><br>
+                </label>
+                <label>Precio :
+                    <input type="number" name="precioProducto"><br>
+                </label>
+                <label>Marca :
+                    <input type="Text" name="marcaProducto"><br>
+                </label>
+                <button type="submit">Cargar nuevo producto</button>
+            </form>
+        </div>
+        
+        
+   
+        <footer th:insert="ThHtmls/partesComunes::menuFooterUsuario"></footer>
+    </body>
+</html>

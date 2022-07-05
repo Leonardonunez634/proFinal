@@ -1,0 +1,275 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600;700;800&display=swap');
+
+:root {
+  --main-font: 'Montserrat', sans-serif;
+  --font-size: 16px;
+  --main-color: #f9d29d;
+  --second-color: #353435;
+  --container-width: 1200px;
+  --color-dark: #15181f;
+  --color-dark-x: #2d343f;
+  --color-dark-xx: #1f232b;
+  --color-light: #ffffff;
+  --color-grey: #f5f6f8;
+}
+
+html {
+  font-size: 62.5%;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+  margin: 0;
+  padding: 0;
+  min-height: 100px;
+}
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+body {
+  font-family: var(--main-font);
+  font-size: 1.6rem;
+  margin: 0;  
+  background-color: #dedede;
+  height: 100vh;
+  width: 100%;
+  background-image: url('../assets/img/b6.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+p {
+  font-size: 2rem;
+  color: #000;
+  line-height: 1.5;
+}
+.contenedor {
+  width: 95%;
+  max-width: 120rem;
+  margin: 0 auto;
+}
+a {
+  text-decoration: none;
+}
+h1,
+h2,
+h3 {
+  margin: 0 0 5rem 0;
+}
+h1 {
+  font-size: 4rem;
+}
+h2 {
+  font-size: 3.6rem;
+}
+h3 {
+  font-size: 3rem;
+}
+
+img {
+  max-width: 100%;
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Mensaje de Error */
+.card {
+  padding: 1rem 3rem;
+  text-transform: uppercase;
+  margin: 1rem 0;
+  max-width: 80rem;
+}
+.error {
+  font-weight: 800;
+  font-size: 1.5rem;
+  background-color: rgba(169, 0, 0, 0.302);
+  border-left: .4rem solid rgb(169, 0, 0);
+  color: rgb(169, 0, 0);
+}
+.exito{
+  padding:0;
+  font-weight: 800;
+  font-size: 1.5rem;
+  background-color: rgba(0, 180, 57, 0.302);
+  border-left: .4rem solid rgb(0, 244, 89);
+  color: rgb(0, 244, 89);
+}
+
+
+/* <===== Login Y Registro ======> */
+.contenedorS {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  min-height: 100vh; 
+  padding-top: 8rem;
+}
+
+.contenedorS h2 {
+  color: #fff6e6;
+  font-size: 2.2rem;
+  margin-bottom: 2rem;
+}
+
+.contact-form {
+    padding: 0;
+    margin-bottom: 5rem;
+}
+
+form {
+  background-color: rgba(186, 186, 186, 0.193);
+  background-color: var(--main-color);
+  width: min(60rem, 100%);
+  justify-content: center;
+  box-shadow: 0 8px 8px rgba(0, 0, 0, 0.136);
+  border-radius: 5px;
+}
+
+form fieldset {
+  border: none;
+  padding: 2rem;
+}
+
+.campo {
+  margin-bottom: 1rem;
+  width: max-content;
+}
+
+.campo:first-of-type {
+  margin-top: 2rem;
+}
+
+.campo label {
+  color:var(--second-color);
+  margin-bottom: 0.5rem;
+  font-size: 1.5rem;
+  display: block;
+  font-weight: 600;
+}
+
+.campo input {
+  background-color: rgba(255, 255, 255, 0.442);
+  width: 100%;
+  border: none;
+  border-radius: 5px;
+  height: 3.5rem;
+  padding-left: 1rem;
+  font-size: 2rem;
+  outline: none;
+  font-family: var(--main-font);
+}
+
+input::placeholder {
+  color: rgba(28, 28, 28, 0.74);
+  padding-left: .5rem;
+  font-size: 1.5rem;
+}
+
+.boton {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.btnPrincipal {
+  border: none;
+  outline: none;
+  width: 200px;
+  margin-top: 4rem;
+  padding: 1rem;
+  background-color: rgba(255, 255, 255, 0.442);
+  border-radius: 5px;
+  font-family: var(--main-font);
+  transition: .4s;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+.btnPrincipal:hover {
+  cursor: pointer;
+  background-color: #ffbf75;
+}
+
+.enlaces {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 2rem;
+}
+.enlaceR {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
+}
+
+.link {
+  margin: 1rem 0;
+}
+
+.link a {
+  text-decoration: none;
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: #353435;
+  transition: .4s;
+}
+
+.link a:hover {
+  color: #000;
+}
+
+/* pal cel*/
+
+@media(min-width:768px) {
+  .contenedorS h2 {
+    font-size: 5rem;
+  }
+  .campo label {
+    font-size: 2rem;
+  }
+  .btnPrincipal {
+    width: 60%;
+    font-size: 1.5rem;
+  }
+  .link a {
+    font-size: 2rem;
+  }
+  input::placeholder {
+    font-size: 1.8rem;
+  }
+}
+
+@media(min-width:400px) {
+  .contenedorS h2 {
+    font-size: 3rem;
+    margin-bottom: 2.5rem;
+  }
+  .campo {
+    width: 100%;
+  }
+  .campo label {
+    font-size: 2rem;
+  }
+  .btnPrincipal {
+    width: 60%;
+    font-size: 1.5rem;
+  }
+  .link a {
+    font-size: 2rem;
+  }
+  input::placeholder {
+    font-size: 1.8rem;
+  }
+  .enlaces {
+    flex-direction: row;
+  }
+}
+
+@media(min-width:350px) {
+    .campo {
+        width: 100%;
+    }
+}

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hamburgers/1.2.1/hamburgers.css">
+                    <link href="dist/hamburgers.css" rel="stylesheet">
+                        <script src="js/menu-hamburgues.js" defer></script>
+                        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+                        <link rel="stylesheet" href="/css/index.css">
+                            <link rel="stylesheet" href="/css/login.css">
+
+                                <title>Music Town | Login</title>
+                                </head>
+                                <body>
+                                    <header class="header">
+                                        <nav th:insert="ThHtmls/partesComunes :: menuNavUsuario"></nav>
+                                    </header>
+
+                                    <div class="contenedor">
+                                        <section class="contenedorS">
+                                            <h2>Iniciar Sesión</h2>
+
+                                            <div th:if="${error}!=null" class="card">
+                                                <div class="card-body">
+                                                    <script type="text/javascript">swal({
+                                                        title: "ERROR",
+                                                        icon: "error",
+                                                        button: "Aceptar",
+                                                        });
+                                                    </script>
+
+                                                    <p class="error" th:text="${
+                                                       error}"></p>
+                                                </div>
+                                            </div>
+                                            <div th:if="${
+                                                 exito}!=null" class="card">
+                                                <script type="text/javascript">swal({
+                                                    title: "EXITO",
+                                                    text: "Se ha registrado con exito",
+                                                    icon: "success",
+                                                    button: "Aceptar",
+                                                    });</script>
+                                                <div class="card-body">
+
+
+                                                </div>
+                                            </div>
+
+                                            <form th:action="@{/logincheck}" method="POST" class="form" enctype="multipart/form-data">
+                                                <fieldset>
+                                                    <div class="contenedorDiv">
+                                                        <div class="campo">
+                                                            <label for="">E-mail:</label>
+                                                            <input 
+                                                                type="email" 
+                                                                name="mail" 
+                                                                placeholder="Tu E-mail"
+                                                                title="Debe ingresar un formato correcto para el mail"
+
+                                                                spellcheck="false"
+                                                                />
+                                                        </div>
+                                                        <div class="campo">
+                                                            <label for="">Contraseña:</label>
+                                                            <input type="password" 
+                                                                   name="clave" 
+                                                                   class="password" 
+                                                                   placeholder="Tu Contraseña" 
+                                                                   required="true">
+                                                        </div>
+                                                    </div>
+                                                    <div class="boton">
+                                                        <input type="submit" class="btnPrincipal" value="Iniciar Sesión">
+                                                    </div>
+                                                    <div class="enlaces">
+                                                        <div class="link">
+                                                            <a href="Usuario/registrar">¿No tienes cuenta?</a>
+                                                        </div>
+                                                        <div class="link">
+                                                            <a href="/olvide">Olvidé mi contraseña</a>
+                                                        </div>
+                                                    </div>
+                                                </fieldset>
+                                            </form>
+                                        </section>
+                                    </div>
+
+                                    <script src="https://kit.fontawesome.com/c3d241543d.js" crossorigin="anonymous"></script>
+                                </body>
+                                </html>
