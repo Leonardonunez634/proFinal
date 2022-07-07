@@ -5,8 +5,8 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import org.hibernate.annotations.GenericGenerator;
@@ -22,17 +22,15 @@ public class CarritoDeCompras {
     private Integer cantidadDeProductos;
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaDeCompra;
-    
-    //Importe total de los productos comprados
+
     private Float importeTotal;
-    
-    //Pueden haber varios productos en una sola compra
-    @OneToMany
+
+    @ManyToMany
     private List<Producto> productosEnCarrito;
-    //Un usuario que compra puede realizar varias compras
+
     @ManyToOne
     private Usuario usuarioComprador;
-    //Se registra horario y fecha de la compra
+
    
 
     public CarritoDeCompras() {

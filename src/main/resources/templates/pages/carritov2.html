@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport"
+              content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+              integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+        <link rel="stylesheet" href="/css/carritov2.css">
+        <link rel="stylesheet" href="/css/index.css">
+        <title>Carrito Compras</title>
+
+    </head>
+
+    <body>
+        <header>
+             <nav sec:authorize="!isAuthenticated()" th:insert="ThHtmls/partesComunes :: menuNavUsuario"></nav>
+             <nav sec:authorize="isAuthenticated()" th:insert="ThHtmls/partesComunesR :: menuNavUsuario"></nav>
+        </header>
+        <main>
+            <form th:action="@{/usuarioLog/confirmarCompra}" method="POST" enctype="multipart/form-data">
+                <table class="Indice" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th class="product-remove">&nbsp;</th>
+                            <th class="product-thumbnail">&nbsp;</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                    <div class="Producto">
+                        <tr th:each=" productosCompra : ${listaProducto}" class="ProductoUno">
+                            <td class="product-thumbnail">
+                                <img width="150" height="150" th:src="@{/foto/mostrarFoto/} + ${productosCompra.getFotoProducto().iterator().next().getId()}" 
+                                     class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" th:alt="${productosCompra.NombreProducto}"
+                                     >
+                            </td>
+
+                            <td class="product-name" data-title="Producto">
+                                <p th:text="${productosCompra.NombreProducto}"></p>
+                                <a href="">
+                                </a>
+                            </td>
+
+                            <td class="product-price" data-title="Precio">
+                                <span class="woocommerce-Price-amount amount"><bdi><span th:text="${productosCompra.PrecioProducto}"
+                                                                                         class="woocommerce-Price-currencySymbol"></span></bdi></span>
+                            </td>
+
+                            <td class="product-quantity" data-title="Cantidad">
+                                <div class="stepper">
+                                    <!-- Minus button -->
+                                    <button class="stepper__button">-</button>
+
+                                    <!-- Input container -->
+                                    <div class="stepper__content">
+                                        <input name="cantidadDeProductos" id="cantidad" type="number" class="stepper__input" value="1"
+                                               style="text-align:center;" />
+                                    </div>
+
+                                    <!-- Plus button -->
+                                    <button class="stepper__button">+</button>
+
+                            </td>
+
+                            <td>
+                                <button class="button-remove">
+
+                                    <svg enable-background="new 0 0 32 32" id="Layer_1" version="1.1" viewBox="0 0 32 32"
+                                         xml:space="preserve" xmlns="http://www.w3.org/2000/svg"
+                                         xmlns:xlink="http://www.w3.org/1999/xlink">
+                                    <g id="trash">
+                                    <path clip-rule="evenodd"
+                                          d="M29.98,6.819c-0.096-1.57-1.387-2.816-2.98-2.816h-3v-1V3.001   c0-1.657-1.344-3-3-3H11c-1.657,0-3,1.343-3,3v0.001v1H5c-1.595,0-2.885,1.246-2.981,2.816H2v1.183v1c0,1.104,0.896,2,2,2l0,0v17   c0,2.209,1.791,4,4,4h16c2.209,0,4-1.791,4-4v-17l0,0c1.104,0,2-0.896,2-2v-1V6.819H29.98z M10,3.002c0-0.553,0.447-1,1-1h10   c0.553,0,1,0.447,1,1v1H10V3.002z M26,28.002c0,1.102-0.898,2-2,2H8c-1.103,0-2-0.898-2-2v-17h20V28.002z M28,8.001v1H4v-1V7.002   c0-0.553,0.447-1,1-1h22c0.553,0,1,0.447,1,1V8.001z"
+                                          fill="#333333" fill-rule="evenodd" />
+                                    <path clip-rule="evenodd"
+                                          d="M9,28.006h2c0.553,0,1-0.447,1-1v-13c0-0.553-0.447-1-1-1H9   c-0.553,0-1,0.447-1,1v13C8,27.559,8.447,28.006,9,28.006z M9,14.005h2v13H9V14.005z"
+                                          fill="#333333" fill-rule="evenodd" />
+                                    <path clip-rule="evenodd"
+                                          d="M15,28.006h2c0.553,0,1-0.447,1-1v-13c0-0.553-0.447-1-1-1h-2   c-0.553,0-1,0.447-1,1v13C14,27.559,14.447,28.006,15,28.006z M15,14.005h2v13h-2V14.005z"
+                                          fill="#333333" fill-rule="evenodd" />
+                                    <path clip-rule="evenodd"
+                                          d="M21,28.006h2c0.553,0,1-0.447,1-1v-13c0-0.553-0.447-1-1-1h-2   c-0.553,0-1,0.447-1,1v13C20,27.559,20.447,28.006,21,28.006z M21,14.005h2v13h-2V14.005z"
+                                          fill="#333333" fill-rule="evenodd" />
+                                    </g>
+                                    </svg>
+
+                                </button>
+                            </td>
+                        </tr>
+                    </div>
+                    </tbody>
+
+                    <div class="Sub-Indice">
+                        <div class="cart_totals">
+
+                            <tfoot cellspacing="0" class="shop_table shop_table_responsive">
+
+
+                                <tr class="order-total">
+                                    <th>Total</th>
+                                    <td data-title="Total" class="td-total"><strong><span th:text="'=$' + ${precioFinal}"
+                                                class="woocommerce-Price-amount amount"></span></strong>
+                                    </td>
+
+                                    <td class="button-finalizar">
+                                        <input type="submit" class="buttonClass" value="Finalizar compra"></input>
+                                    </td>
+                                </tr>
+
+                            </tfoot>
+                    </table>
+            </form>
+        </main>
+        <footer th:insert="ThHtmls/partesComunes::menuFooterUsuario"></footer>
+    </body>
+</html>

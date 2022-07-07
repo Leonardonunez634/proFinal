@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" type="image/x-icon" href="/assets/img/logo.png">
+        <link rel="stylesheet" href="/css/catalogo.css">
+        <link rel="stylesheet" href="/css/index.css">
+        <title>Descripcion productos</title>
+    </head>
+    <body>
+
+        <header class="header">
+            <nav th:insert="ThHtmls/partesComunes :: menuNavUsuario"></nav>
+        </header>
+
+        <section>
+            <div class="containerD">
+
+                <form th:action="@{/descripcionproducto}" method="POST" id="form">
+                    <input type="hidden" th:value="${productos.IdProducto}" name="idProduct" />
+
+                    <section  th:each="producto : ${productos}" class="container-purchase">
+                        <div class="rectangle border1">
+                            <h3 th:text="${producto.NombreProducto}" class="h3"></h3>
+                            <img 
+                                th:src="@{/foto/mostrarFoto/} + ${producto.getFotoProducto().iterator().next().getId()}" 
+                                th:alt="${producto.NombreProducto}" 
+                                th:value="${producto.IdProducto}" 
+                                class="imgC"
+                                >
+
+                            <h3 class="h3">Marca del Producto</h3>
+                            <p th:text="${producto.marcaProducto.NombreMarca}"></p>
+                            <h3 class="h3">Cantidad Disponible</h3>
+                            <p name="cantidadProducto"  th:text="${producto.StockProducto}"> </p>
+                            <h3 class="h3">Precio</h3>
+                            <p th:text="${producto.PrecioProducto}" id="valueProduct"></p>
+                            <h3 class="h3">Total</h3>
+                            <p id="totalPurchase"></p>
+
+                            <h3 class="h3">Cantidad requerida</h3>
+                            <input name="cantidadProducto"  type="number" min="1" th:max="${producto.StockProducto}" class="input-cantity cantP" placeholder="cantidad" required>
+                        </div>
+
+                        <div class="buttons">
+                            <a class="btnC" th:href="@{/usuarioLog/listarProductosCompra/}+${producto.IdProducto}" >Agregar Al Carrito</a>
+                            <input type="button" class="btnD" value="Volver"  onclick="location.href='/producto/catalogo'">
+                        </div>
+
+                </form>
+            </div>
+        </section>
+
+        <footer th:insert="ThHtmls/partesComunes::menuFooterUsuario"></footer>
+
+        <script src="https://unpkg.com/boxicons@2.1.2/dist/boxicons.js"></script>
+        <script src="https://kit.fontawesome.com/c3d241543d.js" crossorigin="anonymous"></script>
+        <script src="javascript-catalogo.js"></script>
+    </body>
+
+</html>

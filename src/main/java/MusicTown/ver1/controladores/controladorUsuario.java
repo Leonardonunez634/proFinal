@@ -22,30 +22,7 @@ public class controladorUsuario {
     @Autowired
     private UsuarioServicios usuarioServicios;
 
-    @GetMapping("/registrar")
-    public String crearUsuario() {
-        return "auth/registro.html";
-    }
-
-    @PostMapping("/registrar")
-    public String registrar(ModelMap modelo,
-            RedirectAttributes redirect,
-            @RequestParam String nombre,
-            @RequestParam String clave,
-            @RequestParam String clave1,
-            @RequestParam String mail) {
-
-        try {
-            usuarioServicios.registrar(nombre, mail, clave, clave1);
-        } catch (ErrorServicio ex) {
-            modelo.put("error", ex.getMessage());
-            modelo.put("nombre", nombre);
-            modelo.put("mail", mail);
-            return "auth/registro.html";
-        }
-        redirect.addFlashAttribute("exito", "El usuario fue registrado con exito");
-        return "redirect:/iniciarSesion";
-    }
+    
 
     @GetMapping("/ModificarUsuario")
     public String editarUsuario(HttpServletRequest request,
@@ -63,12 +40,19 @@ public class controladorUsuario {
     }
 
     @PostMapping("/actualizar-perfil")
-    public String modificar(RedirectAttributes modelo, HttpServletRequest request, @RequestParam String nombre, @RequestParam String mail, @RequestParam String clave, @RequestParam String clave1) {
+    public String modificar(RedirectAttributes modelo, 
+            HttpServletRequest request, 
+            @RequestParam (value="nombre" , required = false) String nombre, 
+            @RequestParam (value="email" , required = false)String mail, 
+            @RequestParam (value="clave" , required = false) String clave, 
+            @RequestParam (value="clave1" , required = false) String clave1) {
         HttpSession sesionUsuario = request.getSession();
         Usuario us = (Usuario) sesionUsuario.getAttribute("datosUsuario");
         try {
-            //usuario = usuarioServicios.buscarPorId(idUsuario);             
-            usuarioServicios.modificar(us.getId(), nombre, mail, clave, clave1);
+            //usuario = usuarioServicios.buscarPorId(idUsuario);
+            System.out.println("nombre = " + nombre + " mail = " + mail + "clave = " + clave);
+            System.out.println("HOLA ENTRANDO A MODIFICAR");
+            usuarioServicios.modificar(us, nombre, mail, clave, clave1);
             return "redirect:/Usuario/ModificarUsuario";
         } catch (ErrorServicio ex) {
             modelo.addAttribute("error", ex.getMessage());

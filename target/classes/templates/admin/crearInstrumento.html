@@ -7,36 +7,21 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hamburgers/1.2.1/hamburgers.css">
     <link href="dist/hamburgers.css" rel="stylesheet">
     <link rel="stylesheet" href="/css/admin.css">
-    <link rel="stylesheet" href="/css/login.css">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js" defer></script>
+    <script src="/js/dashboard.js" defer></script>
+    <script src="/js/alertas.js" defer></script>  
     <title>Administración | Crear</title>
 </head>
 <body>
     <div class="dashboard">
         
-        <aside class="sidebar" th:fragment="menuAdmin">
-            <div class="contenedor-sidebar">
-                <h2>Music Town</h2>
-
-                <div class="cerrar-menu">
-                    <img src="assets/img/cerrar.svg" alt="img cerrar-menu" id="cerrar-menu">
-                </div>
-            </div>
-
-            <nav class="sidebar-nav">
-                <a href="/admin">Instrumentos</a>
-                <a href="usuarios.html">Usuarios</a>
-            </nav>
-
-            <div class="cerrar-sesion-mobile">
-                <a href="/logout" class="cerrar-sesion">Cerrar Sesión</a>
-            </div>
-        </aside>    
+        <aside th:insert="ThHtmls/partesComunes :: menuAdmin"></aside> 
     
         <div class="principal">
             <div class="barra-mobile">
                 <h1>Music Town</h1>
                 <div class="menu">
-                    <img src="/assets/img/menu.svg" alt="img menu" id="mobile-menu">
+                    <img src="/img/menu.svg" alt="img menu" id="mobile-menu">
                 </div>
             </div>
             
@@ -48,8 +33,8 @@
     
             <div class="contenedor">
                 <section class="contenedorS">
-                    <h2>Agregar Nuevo Instrumento</h2>
-        			
+                    <h2 class="h2">Agregar Nuevo Instrumento</h2>
+        
                     <div th:if="${error}!=null" class="card">
                         <div class="card-body">
                             <p class="error" th:text="${error}"></p>
@@ -58,7 +43,7 @@
         
         
                     <form class="contact-form" th:action="@{/admin/guardarProducto}" method="POST" enctype="multipart/form-data">
-                        <fieldset>
+                        <fieldset class="fieldset">
                             <div class="contenedorDiv">
                                 <div class="campo">
                                     <label for="">Nombre:</label>
@@ -67,14 +52,14 @@
                                         type="text" 
                                         name="nombreProducto"  
                                         placeholder="Nombre del instrumento"
-                                        title="El nombre de usuario sólo puede contener letras"
-                                        pattern="^[A-Za-zÑñÁáÉéÍíÓóÚúÜü\s]+$" 
+                                        title="El nombre no puede contener mas de 20 caracteres y solo letras y numeros"        
+                                        pattern="^[A-Za-z0-9ÑñÁáÉéÍíÓóÚúÜü]{3,20}$" 
                                         required
                                         spellcheck="false"
                                         autocomplete="off"
                                     />
                                 </div>
-                                 <div class="campo">
+                                  <div class="campo">
                                     <label for="">Marca:</label>
                                     <input
                                         class="input" 
@@ -95,6 +80,7 @@
                                         type="number" 
                                         name="precioProducto" 
                                         placeholder="Precio del instrumento"
+                                        min="1" 
                                         required
                                     />
                                 </div>
@@ -113,8 +99,9 @@
                                     <input 
                                         type="number" 
                                         name="cantidadProducto" 
-                                        class="unidades" 
+                                        class="unidades input" 
                                         placeholder="Cantidad de unidades"
+                                        min="0"
                                         required
                                     />
                                 </div>
@@ -125,9 +112,10 @@
                         </fieldset>
                     </form>
                 </section>
+                <div class="boton">
+                    <a href="/admin" class="btnVolver" >< Volver</a>
+                </div>
             </div>
     </div>
-
-    <script src="../../static/js/dashboard.js"></script>
 </body>
 </html>

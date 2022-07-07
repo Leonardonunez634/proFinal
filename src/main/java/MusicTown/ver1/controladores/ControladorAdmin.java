@@ -23,6 +23,7 @@ import MusicTown.ver1.errores.ErrorServicio;
 import MusicTown.ver1.repositorio.ProductoRepositorio;
 import MusicTown.ver1.servicio.ProductoServicio;
 import MusicTown.ver1.servicio.UsuarioServicios;
+import java.util.List;
 
 @Controller
 @RequestMapping("/admin")
@@ -95,13 +96,58 @@ public class ControladorAdmin {
 
 	@GetMapping("")
 	public String mostrarCatalogo(ModelMap modelo, RedirectAttributes redirectAtt) {
+
 		try {
-			modelo.addAttribute("listarProductos", productoServicio.buscarTodosProdutos());
+			List<Producto> listarProductos = productoServicio.buscarProdutosAlta();
+			modelo.put("listarProductos",listarProductos);
 			return "/admin/instrumentos.html";
 		} catch (Exception e) {
 			redirectAtt.addFlashAttribute("error", e);
 			return "/admin/instrumentos.html";
 		}
 	}
+        
+        @GetMapping("/darDebaja/{IdProducto}")
+	public String darDebaja(@PathVariable("IdProducto") String IDproductoBaja) {
+		Optional<Producto> productoBaja = productoRepositorio.findById(IDproductoBaja);
+        if(productoBaja.isPresent()){  
+            productoServicio.DarDeBajaProducto(IDproductoBaja);
+
+        }
+        return "redirect:/admin";
+
+	}
+        
+        /* ---------- Seccion usuario ----------------*/
+        /*Busqueda de los usuarios*/
+        @GetMapping("/usuarios")
+        public String mostrarUsuariosRegistrados(ModelMap modelo){
+            try {
+                modelo.addAttribute("listaUsuarios", usuarioServicios.buscarTodosLosUsuariosActivos());
+            } catch (Exception e) {
+                modelo.addAttribute("Error", e);
+            }
+            return "admin/usuarios.html";
+        }
+        
+        @GetMapping("/hacerAdmin/{idAdmin}")
+        public String hacerAdmin(ModelMap modelo , @PathVariable String idAdmin){
+            try {
+               usuarioServicios.HacerAdmin(idAdmin);
+            } catch (Exception e) {
+                modelo.addAttribute("Error", e);
+            }
+            return "redirect:/admin/usuarios";
+        }
+        
+        @GetMapping("/eliminar/{idEliminar}")
+        public String elimnarUsuario(ModelMap modelo , @PathVariable String idEliminar){
+            try {
+               usuarioServicios.deshabilitar(idEliminar);
+            } catch (Exception e) {
+                modelo.addAttribute("Error", e);
+            }
+            return "redirect:/admin/usuarios";
+        }
 
 }

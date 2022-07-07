@@ -32,7 +32,6 @@ public class ControladorFoto {
             
             return new ResponseEntity<>( servisFoto.buscarFotoPorID(fotoId).getContenido(), headers , HttpStatus.OK);
         } catch (Exception e) {
-            System.out.println(e);
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }        
    }

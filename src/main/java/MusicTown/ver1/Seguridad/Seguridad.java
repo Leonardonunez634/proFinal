@@ -1,4 +1,4 @@
-
+ 
 package MusicTown.ver1.Seguridad;
 
 import MusicTown.ver1.servicio.UsuarioServicios;
@@ -41,9 +41,9 @@ public class Seguridad extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()//Con esto hago que se desactive la configuracion por defecto
                 .authorizeRequests().antMatchers("css/**", "js/**", "assets/**").permitAll() //recursos Statics
-                .antMatchers("/", "/inicio", "/iniciarSesion", "producto/catalogo" , "Usuario/registrar").permitAll()//htmls (Direcciones url) permitidas para todos
-                /*.antMatchers("/admin/**").hasRole("ADMIN") // Direcciones url con acceso restringido*/
-                .antMatchers("/usuarioLog/**").hasRole("USUARIOREGISTRADO")
+                .antMatchers("/", "/inicio", "/iniciarSesion", "producto/catalogo" , "/registrar").permitAll()//htmls (Direcciones url) permitidas para todos
+                .antMatchers("/admin/**").hasRole("ADMIN")// Direcciones url con acceso restringido
+                .antMatchers("/Usuario/**").hasRole("USUARIOREGISTRADO")
                 .and()
                 .formLogin()
                 .loginPage("/iniciarSesion")

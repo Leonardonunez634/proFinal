@@ -1,11 +1,14 @@
 package MusicTown.ver1.controladores;
 
 import MusicTown.ver1.servicio.ProductoServicio;
+import MusicTown.ver1.Entidades.Producto;
+import MusicTown.ver1.errores.ErrorServicio;
 import java.util.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -23,7 +26,7 @@ public class ControladorProducto {
 	    public String mostrarCatalogo(ModelMap modelo ,
 	            RedirectAttributes redirectAtt){
 	        try {
-	            modelo.addAttribute("listaProductos", producServis.buscarTodosProdutos());
+	            modelo.addAttribute("listaProductos", producServis.buscarProdutosAlta());
 	            return "pages/catalogo.html";
 	        } catch (Exception e) {
 	            redirectAtt.addFlashAttribute("error" , e);
@@ -32,10 +35,19 @@ public class ControladorProducto {
 	    }
     
     
-    @GetMapping("/{id}") /*Metodo Para mostra 1 Solo producto*/
-    public String mostrarUnSoloProducto(){
-        return "VistaProducto.html";
-    }
+   @GetMapping("/descripcionproducto/{IdProducto}")
+   public String verdetalleproducto(ModelMap modelo, @PathVariable("IdProducto") String IdProducto) throws ErrorServicio{
+       try {
+            Producto producto = producServis.buscarUnProductoXID(IdProducto);
+            modelo.put("productos", producto);            
+        } catch (ErrorServicio e) {           
+            throw new ErrorServicio("Producto no econtrado");
+        }        
+      
+       
+        return "pages/descripcionproducto.html";
+       
+   }
     
    @PostMapping("/guardarProducto")
    public String guardarProducto(@RequestParam("nombreProducto") String nombreProducto , 

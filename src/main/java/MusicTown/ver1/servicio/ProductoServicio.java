@@ -74,18 +74,20 @@ public class ProductoServicio {
             repoProducto.save(productoBajaFinal);
         }  
     }
-    
+    public List<Producto> buscarProdutosAlta() {
+
+		return repoProducto.findByAlta(true);
+	}
     /* Control de Stock = con este metodo se pueden agregar o restar Stock
     (Tambien busca ser un SUMAR RESTAR cuando algun cliente compre 1 o + productos)*/
     @Transactional
-    public void ControlStock(String IdProductoStock , int Cantidad){
-       Optional<Producto> Producto = repoProducto.findById(IdProductoStock);
-        if(Producto.isPresent()){
-            Producto ProductoStock = Producto.get();
-            ProductoStock.setStockProducto(ProductoStock.getStockProducto() + Cantidad);
+    public void ControlStock(Producto producto , int Cantidad){
+
+            int cantidadStock = producto.getStockProducto();
+            cantidadStock = cantidadStock + Cantidad;
+            producto.setStockProducto(cantidadStock);
             /* Si el usuario compro o se quieren sacar productos uno tiene que Pasrle por parametro un numero Negativo
-            multiplicarlo x-1 */
-        }  
+            multiplicarlo x-1 */  
     }
     /*========== Buscar un producto x ID*/
     public Producto buscarUnProductoXID(String idProducto) throws ErrorServicio{
@@ -147,4 +149,27 @@ public class ProductoServicio {
             
         }
     }
+    /* Metodo para buscar productos x ID en lista (Controlador carrito)*/
+    public List<Producto> BuscarProductosXID (List<String> listaIdProd){
+         List<Producto> productosReturn = new ArrayList();
+         
+         for(String id: listaIdProd){
+             productosReturn.add(repoProducto.buscarPorId(id));
+         }
+         
+         return productosReturn;
+    }
+    
+    /**/
+     public List<Producto> buscarProd(List<Producto> listaProductoCompra) {
+
+        List<Producto> productosCompra = new ArrayList();
+
+        for (Producto producto : listaProductoCompra) {
+            productosCompra.add(repoProducto.buscarPorId(producto.getIdProducto()));
+        }
+
+        return productosCompra;
+    }
+    
 }

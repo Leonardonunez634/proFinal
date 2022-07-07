@@ -33,7 +33,7 @@ public class UsuarioServicios implements UserDetailsService {
     
     @Autowired
     private MailNotificaciones mailNotificaciones;
-
+    
     @Transactional
     public void registrar(String nombre, String mail, String clave, String clave1) throws ErrorServicio {
         validar(nombre, mail, clave, clave1);
@@ -50,27 +50,42 @@ public class UsuarioServicios implements UserDetailsService {
         usuarioRepositorio.save(usuario);
     }
 
-    @Transactional
-    public void modificar(String id, String nombre, String mail, String clave, String clave1) throws ErrorServicio {
-        Optional<Usuario> respuesta = usuarioRepositorio.findById(id);
-        if (respuesta.isPresent()) {
 
-            Usuario usuario = respuesta.get();
-            if(nombre != null){
-            usuario.setNombre(nombre);
-            }
-            if(mail != null){
-            usuario.setMail(mail);
-            }
-            validar1(clave,clave1);
-            validarbool(clave, clave1);
-            if(clave != null || Boolean.valueOf(false)){
-            String encriptada = new BCryptPasswordEncoder().encode(clave);
-            usuario.setClave(encriptada);}
-            usuarioRepositorio.save(usuario);
-        } else {
-            throw new ErrorServicio("No se encontro el usuario solicitado.");
+@Transactional
+    public void modificar(Usuario usuario, String nombre, String mail, String clave, String clave1) throws ErrorServicio {
+
+        try{
+            usuarioRepositorio.save(validarModificar(nombre, mail, clave, clave1, usuario));
+            
+        }catch(Exception e){
+            throw new ErrorServicio("usuario No encontrado");
         }
+        
+    }
+
+     private Usuario validarModificar(String nombre, String mail, String clave, String clave1 , Usuario usuario) throws ErrorServicio {
+
+        if (!(nombre.isEmpty()) || !(nombre.trim().isEmpty())) {
+            usuario.setNombre(nombre);
+        }else{
+            System.out.println("no se guardo la usuario");
+        }
+
+        if (mail != null ) {
+            usuario.setMail(mail);
+        }else{
+            System.out.println("no se guardo el mail");
+        }
+        if (!(clave.trim().isEmpty()) || clave.length() > 6) {
+            if (clave1.equalsIgnoreCase(clave)) {
+                usuario.setClave(clave);
+            }else{
+                throw new ErrorServicio("Las claves son distintas");
+            }
+        }else{
+            System.out.println("no se guardo la clave");
+        }
+        return usuario;
     }
 
     @Transactional
@@ -96,7 +111,6 @@ public class UsuarioServicios implements UserDetailsService {
             throw new ErrorServicio("No se encontro el usuario solicitado.");
         }
     }
-
     private void validar(String nombre, String mail, String clave, String clave1) throws ErrorServicio {
         if (nombre == null || nombre.trim().isEmpty()) {
             throw new ErrorServicio("El nombre del usuario no puede ser nulo");
@@ -111,30 +125,7 @@ public class UsuarioServicios implements UserDetailsService {
             throw new ErrorServicio("La clave y la verificacion de la clave deben ser iguales");
         }
     }
-    
-    private void validar1(String clave, String clave1) throws ErrorServicio {
-        
-        if (clave == null || clave.trim().isEmpty() || clave.length() < 6) {
-         throw new ErrorServicio("La clave no puede tener menos de 6 digitos");
-        }
-        
-        if (!(clave.equals(clave1))) {
-            throw new ErrorServicio("La clave y la verificacion de la clave deben ser iguales");
-        }
-    }
 
-    private void validarbool(String clave, String clave1){
-       boolean si= false;
-        if (clave == null || clave.trim().isEmpty() || clave.length() < 6) {
-         si = true;
-        }
-        
-        if (!(clave.equals(clave1))) {
-           si = true;
-        }
-        Boolean.valueOf(si);
-    }
-    
     @Override
     public UserDetails loadUserByUsername(String mail) throws UsernameNotFoundException {
         Usuario usuario = usuarioRepositorio.buscarPorMail(mail);
@@ -142,18 +133,18 @@ public class UsuarioServicios implements UserDetailsService {
 
             List<GrantedAuthority> permisos = new ArrayList<>();
 
-            GrantedAuthority p1 = new SimpleGrantedAuthority("MODULO_FOTOS");
-            permisos.add(p1);
-            GrantedAuthority p2 = new SimpleGrantedAuthority("MODULO_PRODUCTO");
-            permisos.add(p2);
-            GrantedAuthority p3 = new SimpleGrantedAuthority("MODULO_COMPRA");
-            permisos.add(p3);
-           
-            
-            ServletRequestAttributes attr = (ServletRequestAttributes)RequestContextHolder.currentRequestAttributes();
+            if (usuario.getRol().equals(Roles.ADMIN)) {
+                GrantedAuthority p1 = new SimpleGrantedAuthority("ROLE_ADMIN");
+                permisos.add(p1);
+            } else {
+                GrantedAuthority p1 = new SimpleGrantedAuthority("ROLE_USUARIOREGISTRADO");
+                permisos.add(p1);
+            }
+
+            ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
             HttpSession sesion = attr.getRequest().getSession(true);
             sesion.setAttribute("datosUsuario", usuario);
-            
+
              User user = new User(usuario.getNombre(), usuario.getClave(), permisos);
             
             return user;
@@ -172,5 +163,26 @@ public class UsuarioServicios implements UserDetailsService {
             throw new ErrorServicio("No se encontro el usuario");
         }
 
+    }
+    
+    public List<Usuario> buscarTodosLosUsuariosActivos() throws ErrorServicio{
+         List<Usuario> listaUsuarios = new ArrayList();
+         try {
+            listaUsuarios = usuarioRepositorio.buscarUsuariosActivos();
+        } catch (Exception e) {
+             System.out.println(e);
+        }
+         return listaUsuarios;  
+    }
+    
+    public void HacerAdmin(String idAdmin)throws ErrorServicio{
+        Optional<Usuario> usuario = usuarioRepositorio.findById(idAdmin);
+        if(usuario.isPresent()){
+            Usuario usuarioAdmin = usuario.get();
+            usuarioAdmin.setRol(Roles.ADMIN);
+            usuarioRepositorio.save(usuarioAdmin);
+        }else{
+            throw new ErrorServicio("No se encontro");
+        }
     }
 }

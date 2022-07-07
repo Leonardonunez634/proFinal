@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import MusicTown.ver1.Entidades.Producto;
+import java.util.List;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
@@ -15,8 +16,8 @@ public interface ProductoRepositorio extends JpaRepository<Producto, String> {
     @Query("SELECT p FROM Producto p WHERE p.NombreProducto = :NombreProducto")
     public Producto buscarPorNombre(@Param("NombreProducto") String NombreProducto);
 
-//    @Query("SELECT stock_producto FROM Producto p WHERE p.IdProducto = :IdProducto")
-//    public Producto stockDisponible(@Param("IdProducto") String IdProducto);
+    @Query("Select p from Producto p WHERE p.Alta  = true")
+    public List<Producto> findByAlta(@Param("Alta") Boolean Alta);
 
     @Query("SELECT p FROM Producto p WHERE p.IdProducto = :IdProducto")
     public Producto buscarPorId(@Param("IdProducto") String IdProducto);

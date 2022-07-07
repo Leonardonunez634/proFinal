@@ -1,0 +1,106 @@
+body {
+    font-family: var(--main-font);
+    overflow-x: hidden;
+}
+
+p {
+    text-align: center;
+}
+
+
+.h3 {
+    margin: 1rem 0;
+    text-align: center;
+}
+
+.encabezado {
+    font-family: var(--title-font);
+    font-weight: normal;
+}
+
+.containerCards {
+    padding-top: 10rem;
+    min-height: 100vh;
+    text-align: center;
+    margin: 1rem;
+
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-rows: auto;
+    gap: 3rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.info-card {
+    display: flex;
+    flex-direction: column;
+}
+
+.btnC {
+    background-color: var(--second-color);
+    outline: none;
+    border: none;
+    margin: 1rem;
+    padding: 1rem;
+    color: #fff;
+    transition: all .3s linear;
+    border-radius: .2rem;
+}
+.btnC:hover {
+    background-color: rgb(204, 158, 89);
+    color: black;
+}
+
+.cantP {
+    margin-bottom: 2rem;
+}
+
+
+.buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.btnD {
+    padding: 1rem 2.5rem;
+    background-color: var(--second-color);
+    outline: none;
+    border: none;
+    color: #fff;
+    transition: all .3s linear;
+    border-radius: .2rem;
+    font-family: var(--main-font);
+    font-size: 1.5rem;
+}
+.btnD:hover {
+    background-color: rgb(204, 158, 89);
+    color: black;
+}
+
+.containerD {
+    padding-top: 10rem;
+    display: flex;
+    justify-content: center;
+    flex-flow: row wrap;
+    align-items: center;
+}
+
+.input-cantity {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    text-align: center;
+    font-family: var(--main-font);
+}
+
+.imgC {
+    margin: 0;
+    width: 100%;
+    max-height: 300px;
+    object-fit: cover;
+}
