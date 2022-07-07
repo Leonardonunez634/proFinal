@@ -86,4 +86,24 @@ public class PortalControlador {
             
         return"redirect:/";
     }
+    
+    @GetMapping("/recuperarClave")
+    public String olvide() {
+        return "auth/olvide.html";
+    }
+    
+    @PostMapping("/recuperar")
+    public String recuperar(RedirectAttributes notificacion1,
+            @RequestParam("email") String emailUsuario1){
+        try {
+            mailNotis.mailsender(emailUsuario1, "Music Town:Recuperacion de clave ", "Gracias por comunicarte con MusicTown, en la brevedad estaremos en contacto con vos. Atte : Equipo Music");
+            //Enviamos un mail de confirmacion al usuario
+            notificacion1.addFlashAttribute("exito" , "mail enviado con exito");
+        } catch (Exception e1) {
+
+            notificacion1.addFlashAttribute("error" , "Error en el envio : " + e1);
+        }
+
+        return"redirect:/";
+    }
 }

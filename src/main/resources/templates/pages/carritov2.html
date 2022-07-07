@@ -33,8 +33,8 @@
                     <div class="Producto">
                         <tr th:each=" productosCompra : ${listaProducto}" class="ProductoUno">
                             <td class="product-thumbnail">
-                                <img width="150" height="150" th:src="@{/foto/mostrarFoto/} + ${productosCompra.getFotoProducto().iterator().next().getId()}" 
-                                     class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" th:alt="${productosCompra.NombreProducto}"
+                                <img th:src="@{/foto/mostrarFoto/} + ${productosCompra.getFotoProducto().iterator().next().getId()}" 
+                                     class="imagen" th:alt="${productosCompra.NombreProducto}"
                                      >
                             </td>
 
@@ -105,8 +105,8 @@
                                                 class="woocommerce-Price-amount amount"></span></strong>
                                     </td>
 
-                                    <td class="button-finalizar">
-                                        <input type="submit" class="buttonClass" value="Finalizar compra"></input>
+                                    <td class="">
+                                        <input type="submit" class="btnCarrito" value="Finalizar compra"></input>
                                     </td>
                                 </tr>
 
@@ -115,5 +115,6 @@
             </form>
         </main>
         <footer th:insert="ThHtmls/partesComunes::menuFooterUsuario"></footer>
+        <script src="https://kit.fontawesome.com/c3d241543d.js" crossorigin="anonymous"></script>
     </body>
 </html>
