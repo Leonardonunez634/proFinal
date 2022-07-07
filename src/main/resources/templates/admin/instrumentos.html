@@ -34,18 +34,6 @@
     
             <div class="contenido">
                 <h2 class="nombre-pagina">Administración Instrumentos</h2>
-
-                <div th:if="${ActExito}!=null" class="card">
-                    <div class="card-body">
-                        <script type="text/javascript">swal({
-                            title: "Exito",
-                            text: "Actualizado correctamente",
-                            icon: "success",
-                            button: "Aceptar",
-                            });
-                        </script>
-                    </div>
-                </div>
                 
                 <a href="/admin/crearInstrumento" class="btn">Nuevo Instrumento</a>
 

@@ -22,6 +22,7 @@
                 </span>
             </button>
             <ul class="nav-menu">                      
+                <li class="nav-menu-item"><a href="/admin" class="nav-menu-link nav-link" sec:authorize="hasRole('ROLE_ADMIN')">ADMIN</a></li>
                 <li class="nav-menu-item"><a href="/producto/catalogo" class="nav-menu-link nav-link">Catalogo</a></li>            
                 <li class="nav-menu-item"><a href="#contacto" class="nav-menu-link nav-link">Contacto</a></li>  
                 <li class="nav-menu-item"><a th:href="@{/Usuario/ModificarUsuario}" class="nav-menu-link nav-link fa-solid fa-user"></a></li>

@@ -126,27 +126,29 @@ public class UsuarioServicios implements UserDetailsService {
         }
     }
 
-    @Override
+@Override
     public UserDetails loadUserByUsername(String mail) throws UsernameNotFoundException {
         Usuario usuario = usuarioRepositorio.buscarPorMail(mail);
         if (usuario != null) {
 
             List<GrantedAuthority> permisos = new ArrayList<>();
 
-            if (usuario.getRol().equals(Roles.ADMIN)) {
-                GrantedAuthority p1 = new SimpleGrantedAuthority("ROLE_ADMIN");
-                permisos.add(p1);
-            } else {
-                GrantedAuthority p1 = new SimpleGrantedAuthority("ROLE_USUARIOREGISTRADO");
-                permisos.add(p1);
-            }
+        if(usuario.getRol().equals(Roles.ADMIN)){
+            GrantedAuthority p1 = new SimpleGrantedAuthority("ROLE_ADMIN");
+            permisos.add(p1);
+            GrantedAuthority p2 = new SimpleGrantedAuthority("ROLE_USUARIOREGISTRADO");
+            permisos.add(p2);
+        }else{
+            GrantedAuthority p1 = new SimpleGrantedAuthority("ROLE_USUARIOREGISTRADO");
+             permisos.add(p1);
+        }
 
-            ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
-            HttpSession sesion = attr.getRequest().getSession(true);
-            sesion.setAttribute("datosUsuario", usuario);
+        ServletRequestAttributes attr = (ServletRequestAttributes)RequestContextHolder.currentRequestAttributes();
+        HttpSession sesion = attr.getRequest().getSession(true);
+        sesion.setAttribute("datosUsuario", usuario);
 
-             User user = new User(usuario.getNombre(), usuario.getClave(), permisos);
-            
+         User user = new User(usuario.getNombre(), usuario.getClave(), permisos);
+
             return user;
         } else {
             return null;

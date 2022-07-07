@@ -7,30 +7,15 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hamburgers/1.2.1/hamburgers.css">
     <link href="dist/hamburgers.css" rel="stylesheet">
     <link rel="stylesheet" href="/css/admin.css">
-    <link rel="stylesheet" href="/css/login.css">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js" defer></script>
+    <script src="/js/dashboard.js" defer></script>
+    <script src="/js/alertas.js" defer></script>  
     <title>Administración | Actualizar</title>
 </head>
 <body>
     <div class="dashboard">
         
-        <aside class="sidebar" th:fragment="menuAdmin">
-            <div class="contenedor-sidebar">
-               <a th:href="@{/}"><h1>Music Town</h1></a>
-
-                <div class="cerrar-menu">
-                    <img src="assets/img/cerrar.svg" alt="img cerrar-menu" id="cerrar-menu">
-                </div>
-            </div>
-
-            <nav class="sidebar-nav">
-                <a href="/admin">Instrumentos</a>
-                <a href="usuarios.html">Usuarios</a>
-            </nav>
-
-            <div class="cerrar-sesion-mobile">
-                <a href="/logout" class="cerrar-sesion">Cerrar Sesión</a>
-            </div>
-        </aside>    
+        <aside th:insert="ThHtmls/partesComunes :: menuAdmin"></aside>   
     
         <div class="principal">
             <div class="barra-mobile">
@@ -58,7 +43,7 @@
         
         
                     <form class="contact-form" th:action="@{/admin/editarProducto/}+${IdProducto}" method="POST" enctype="multipart/form-data">
-                        <fieldset>
+                        <fieldset class="fieldset">
                             <div class="contenedorDiv">
                             <input type="hidden" th:value="${producto.IdProducto}"</input>
                                 <div class="campo">
@@ -69,8 +54,6 @@
                                         name="nombreProducto"  
                                         placeholder="Nombre del instrumento"
                                         title="El nombre de usuario sólo puede contener letras"
-                                        pattern="^[A-Za-zÑñÁáÉéÍíÓóÚúÜü\s]+$" 
-                                        required
                                         spellcheck="false"
                                         autocomplete="off"
                                     />
@@ -82,6 +65,7 @@
                                         type="number" 
                                         name="precioProducto"  
                                         placeholder="Precio del instrumento"
+                                        
                                     />
                                 </div>
                                 <div class="campo">
@@ -91,7 +75,7 @@
                                         type="text" 
                                         name="marcaProducto" 
                                         placeholder="Marca del instrumento"
-                                        required
+                                        
                                     />
                                 </div>
                                 <div class="campo">
@@ -101,7 +85,7 @@
                                         name="fotoProducto"
                                         multiple
                                         class="imagen"
-                                        required
+                                        
                                     /> 
                                 </div>
                                 <div class="campo">
@@ -111,7 +95,7 @@
                                         name="cantidadProducto" 
                                         class="unidades" 
                                         placeholder="Cantidad de unidades"
-                                        required
+                                        
                                     />
                                 </div>
                             </div>
@@ -124,6 +108,6 @@
             </div>
     </div>
 
-    <script src="../../static/js/dashboard.js"></script>
+    <script src="/js/dashboard.js"></script>
 </body>
 </html>

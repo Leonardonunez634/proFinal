@@ -11,7 +11,7 @@
     <body>
         <!-- menu que se muestra en el index comun / login / cualquier vista Usuario-->
         <nav class="nav" th:fragment="menuNavUsuario">
-            <a href="/inicio"><img class="logo" src="/assets/img/logo.png" alt="logo"></a>
+            <a href="/inicio"><img class="logo" src="/assets/img/logo2.png" alt="logo"></a>
             <div class="container-title"></div>
             <div class="title">
                 <a href="/inicio"><h1>Music Town</h1></a>
@@ -21,33 +21,45 @@
                     <span class="hamburger-inner"></span>
                 </span>
             </button>
-            <ul class="nav-menu">
-                 <li class="nav-menu-item"><a href="/admin" class="nav-menu-link nav-link" sec:authorize="hasRole('ROLE_ADMIN')">ADMIN</a></li> 
-                <li class="nav-menu-item"><a href="/logout" class="nav-menu-link nav-link">logout</a></li>                           
+            <ul class="nav-menu">                      
                 <li class="nav-menu-item"><a href="/producto/catalogo" class="nav-menu-link nav-link">Catalogo</a></li>            
-                <li class="nav-menu-item"><a href="/#contacto" class="nav-menu-link nav-link">Contacto</a></li>
-                <li class="nav-menu-item"><a th:href="@{/Usuario/ModificarUsuario}" class="nav-menu-link nav-link">Perfíl</a></li> 
-                <li class="nav-menu-item"><a href="@{/usuarioLog/mostrarCompra}" class="nav-menu-link nav-link fa-solid fa-cart-shopping"></a></li>    
+                <li class="nav-menu-item"><a href="#contacto" class="nav-menu-link nav-link">Contacto</a></li>  
+                <li class="nav-menu-item"><a th:href="@{/Usuario/ModificarUsuario}" class="nav-menu-link nav-link fa-solid fa-user"></a></li>
+                <li class="nav-menu-item"><a th:href="@{/usuarioLog/mostrarCompra}" class="nav-menu-link nav-link fa-solid fa-cart-shopping"></a></li>    
+                <li class="nav-menu-item"><a href="/logout" class="nav-menu-link nav-link fa-solid fa-right-from-bracket"></a></li>  
             </ul>
         </nav>
          <!-- footer que se muestra en el index comun / login / cualquier vista Usuario-->
          <footer th:fragment="menuFooterUsuario">
             <div class="main-footer">
-                <div class="footersection">
-                    <h2 class="footertitle">Sobre Nostros</h2>
-                    <p class="footertxt">Somos un E-Commerce de instrumentos en donde puedes adquirir una amplia variedad de intrumentos y accesorios.</p>
+                <div class="footersection columns">
+                    <div class="logo">
+                        <a href="/inicio"><img class="logo" src="/assets/img/logo2.png" alt="logo"></a>
+                    </div>
+                    <div class="footertxt">
+                        <p>Somos un E-Commerce de instrumentos en donde puedes adquirir una amplia variedad de intrumentos y accesorios.</p>
+                    </div>
+                </div>
+                <div class="footerseccion">
+                    <a href="inicio" class="footerlink">Home</a>
+                    <a href="/catalogo" class="footerlink">Catalogo</a>
+                    <a href="/iniciarSesion" class="footerlink">Iniciar Sesión</a>
                 </div>
                 <div class="footersection">
-                    <h2 class="footertitle">Ubicación</h2>
-                    <p class="footertxt">Ciudad de Mendoza, Argertina</p>
-                    <h2 class="footertitle">Contacto</h2>
-                    <p class="footertxt">Teléfono:+121 098 8907 9987</p>
-                    <p class="footertxt">Email : musictownservice@gmail.com</p>
-                </div>
-                <div class="footersection">
-                    <h2 class="footertitle">enlaces</h2>
-                    <a href="/inicio" class="footerlink">Home</a>
-                    <a href="#" class="footerlink">Catalogo</a>
+                    <div class="footertitle">
+                        <h4 class="">Siguenos</42>
+                    </div>
+                    <div class="enlaces">
+                        <a href="#">
+                            <i class="fa-brands fa-instagram"></i>
+                        </a>
+                        <a href="#">
+                            <i class="fa-brands fa-twitter"></i>
+                        </a>
+                        <a href="#">
+                            <i class="fa-brands fa-facebook"></i>
+                        </a>
+                    </div>
                 </div>
             </div>
             <p class="copy">© Music Town. Todos los derechos reservados 2022</p>
