@@ -14,7 +14,8 @@
   </head>
   <body>
     <header class="header">
-        <nav th:insert="ThHtmls/partesComunes :: menuNavUsuario"></nav>
+         <nav sec:authorize="!isAuthenticated()" th:insert="ThHtmls/partesComunes :: menuNavUsuario"></nav>
+         <nav sec:authorize="isAuthenticated()" th:insert="ThHtmls/partesComunesR :: menuNavUsuario"></nav>
     </header>
     
     <div class="contenedor">
