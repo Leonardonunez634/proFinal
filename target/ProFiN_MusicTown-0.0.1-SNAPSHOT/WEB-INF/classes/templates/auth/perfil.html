@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hamburgers/1.2.1/hamburgers.css">
+    <link rel="icon" type="image/x-icon" href="/assets/img/logo2.png">
     <link href="dist/hamburgers.css" rel="stylesheet">
     <script src="/js/menu-hamburguesa.js" defer></script>
     <script src="/js/formulario.js" defer></script>
@@ -15,7 +16,8 @@
   </head>
   <body>
     <header class="header">
-        <nav th:insert="ThHtmls/partesComunes :: menuNavUsuario"></nav>
+         <nav sec:authorize="!isAuthenticated()" th:insert="ThHtmls/partesComunes :: menuNavUsuario"></nav>
+         <nav sec:authorize="isAuthenticated()" th:insert="ThHtmls/partesComunesR :: menuNavUsuario"></nav>
     </header>
     
     <div class="contenedor">
@@ -38,12 +40,12 @@
                                 class="input is-active" 
                                 type="text" 
                                 name="nombre" 
-                                th:value="${usuarioMostrar.nombre}"
-                                placeholder="Tu usuario"
+                                th:placeholder="${usuarioMostrar.nombre}"
                                 title="El nombre de usuario sólo puede contener letras"
                                 spellcheck="false"
                                 autocomplete="off"
-                            />
+                                value=""
+                            >
                         </div>
                         <div class="campo">
                             <label for="">E-mail:</label>
@@ -51,12 +53,12 @@
                                 class="input" 
                                 type="email" 
                                 name="mail" 
-                                placeholder="Tu email"
+                                th:placeholder="${usuarioMostrar.mail}"
                                 title="Debe ingresar un formato correcto para el mail"
-                                th:value="${usuarioMostrar.mail}"
                                 spellcheck="false"
                                 autocomplete="off"
-                            />
+                                value=""
+                            >
                         </div>
                         <div class="campo">
                             <label for="">Contraseña:</label>
@@ -64,7 +66,8 @@
                                    name="clave" 
                                    class="password" 
                                    placeholder="Tu Contraseña"
-                                   th:value="${clave}">
+                                   value=""
+                                   >
                         </div>
                         <div class="campo">
                             <label for="">Repetir Contraseña:</label>
@@ -72,7 +75,7 @@
                                    name="clave1" 
                                    class="password" 
                                    placeholder="Repita su contraseña"
-                                   th:value="${clave1}"
+                                   value=""
                                    >
                         </div>
                     </div>

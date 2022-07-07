@@ -1,44 +1,26 @@
 <!DOCTYPE html>
-<html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
-    xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
-
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hamburgers/1.2.1/hamburgers.css">
     <link href="dist/hamburgers.css" rel="stylesheet">
-     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js" defer></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js" defer></script>
+    <script src="/js/dashboard.js" defer></script>
+    <script src="/js/alertas.js" defer></script>
     <link rel="stylesheet" href="/css/admin.css">
-   
 
     <title>Administración</title>
 </head>
 <body>
     <div class="dashboard">
         
-        <aside class="sidebar" th:fragment="menuAdmin">
-            <div class="contenedor-sidebar">
-                <h2>Music Town</h2>
-
-                <div class="cerrar-menu">
-                    <img src="assets/img/cerrar.svg" alt="img cerrar-menu" id="cerrar-menu">
-                </div>
-            </div>
-
-            <nav class="sidebar-nav">
-                <a href="/admin">Instrumentos</a>
-                <a href="usuarios.html">Usuarios</a>
-            </nav>
-
-            <div class="cerrar-sesion-mobile">
-                <a href="/logout" class="cerrar-sesion">Cerrar Sesión</a>
-            </div>
-        </aside>    
+        <aside th:insert="ThHtmls/partesComunes :: menuAdmin"></aside> 
     
         <div class="principal">
             <div class="barra-mobile">
-                <h1>Music Town</h1>
+                <a th:href="@{/}"><h1>Music Town</h1></a>
                 <div class="menu">
                     <img src="/assets/img/menu.svg" alt="img menu" id="mobile-menu">
                 </div>
@@ -53,40 +35,47 @@
             <div class="contenido">
                 <h2 class="nombre-pagina">Administración Instrumentos</h2>
 
+                <div th:if="${ActExito}!=null" class="card">
+                    <div class="card-body">
+                        <script type="text/javascript">swal({
+                            title: "Exito",
+                            text: "Actualizado correctamente",
+                            icon: "success",
+                            button: "Aceptar",
+                            });
+                        </script>
+                    </div>
+                </div>
+                
                 <a href="/admin/crearInstrumento" class="btn">Nuevo Instrumento</a>
 
 
-                <table class="instrumentos">
+                <table class="usuarios">
                     <thead>
-                        <tr>
-                            <th>Titulo</th>
+                        <tr> 
+                            <th>Nombre</th>
                             <th>Imagen</th>
                             <th>Precio</th>
                             <th>Acciones</th>
-                        </tr>
+                        </tr>  
                     </thead>
-            
+                  
                     <tbody> <!-- Mostrar Resultados  -->
-						<tr>
-							<th:block th:each="producto : ${listarProductos}">
-								<td th:text="${producto.nombreProducto}"></td>
-								<td><img th:src="@{/foto/mostrarFoto/} + ${producto.getFotoProducto().iterator().next().getId()}" class="imagen-tabla"></td>
-								<td th:text="${producto.precioProducto}"></td>
-								<td>
-									<a href="#" onclick="eliminar()" class="btn elim">Eliminar</a>
-									<a th:href="@{/admin/actualizar/}+${producto.IdProducto}" class="btn act">Actualizar</a>
-							</td>
-							</th:block>
-						</tr>
-                       
+                        <tr:block th:each="producto : ${listarProductos}">
+                            <td th:text="${producto.nombreProducto}"></td>
+                            <td class="container-img"><img th:src="@{/foto/mostrarFoto/} + ${producto.getFotoProducto().iterator().next().getId()}" class="imagen-tabla"></td>
+                            <td th:text="${producto.precioProducto}"></td>
+                            <td>
+                                <a th:href="@{/admin/darDebaja/}+${producto.IdProducto}" class="btn elim">Eliminar</a>
+                                <a th:href="@{/admin/actualizar/}+${producto.IdProducto}" class="btn act">Actualizar</a>
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
-            
-
             </div>
         </div>
     </div>
 
-    <script src="../../static/js/dashboard.js"></script>
+    <script src="/js/dashboard.js"></script>
 </body>
 </html>

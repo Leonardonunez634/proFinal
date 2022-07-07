@@ -1,34 +1,36 @@
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
 <html>
     <head>
-        <title>TODO supply a title</title>
+        <title>Error</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="/css/index.css"> 
         <link rel="stylesheet" href="/css/error.css"> 
+        <link rel="icon" type="image/x-icon" href="/assets/img/logo2.png">
     </head>
     <body>
         <header class="header">
             <nav sec:authorize="!isAuthenticated()" th:insert="ThHtmls/partesComunes :: menuNavUsuario"></nav>
             <nav sec:authorize="isAuthenticated()" th:insert="ThHtmls/partesComunesR :: menuNavUsuario"></nav>
         </header>
+
         <main>
-            <div class="contenedorIMG">
-                <img class="imagenError" src="/assets/img/guitarraErrorSinFondo.png">
+            <div class="containerError">
+                <div class="contenedorIMG">
+                    <img class="imagenError" src="/assets/img/guitarraErrorSinFondo.png">
+                </div>
+                
+                <div class="contenedorLetras">
+                    <h4>Disculpe las molestias, ocurrio un error</h4>
+                    <p class="textoMensaje" th:text="${mensaje}"></p>
+                    <p class="errorCodigo" th:text="'Error : ' + ${codigo}"></p>
+                
+                <a class="btnD" th:href="@{/}">Volver al inicio</a>
+                </div>
             </div>
             
-            <div class="contenedorLetras">
-                <h4>Disculpe las molestias, ocurrio un error</h4>
-                <p class="textoMensaje" th:text="${mensaje}"></p>
-                <p class="errorCodigo" th:text="'Error : ' + ${codigo}"></p>
-            </div>
-            <a th:href="@{/}">Volver al inicio</a>
         </main>
         <footer th:insert="ThHtmls/partesComunes::menuFooterUsuario"></footer>
+        <script src="https://kit.fontawesome.com/c3d241543d.js" crossorigin="anonymous"></script>
     </body>
 </html>

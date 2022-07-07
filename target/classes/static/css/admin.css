@@ -48,6 +48,7 @@ h3 {
 }
 h1 {
   font-size: 4rem;
+  color: #000;
 }
 h2 {
   font-size: 3.6rem;
@@ -125,8 +126,7 @@ img {
     background-color: #dedede;
 }
 .dashboard .principal {
-    flex: 1;
-    overflow: hidden;
+    flex: 1; 
     min-height: 100vh;
 }
 
@@ -261,6 +261,101 @@ img {
     background-color: #fbc477;
 }
 
+
+/*** FORM ***/
+.contact-form {
+    margin: 1rem auto;
+}
+
+.contenedorS {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: column;
+}
+
+.h2 {
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+}
+
+.fieldset {
+    background-color: var(--main-color);
+    border: none;
+    padding: 2rem;
+    border-radius: .3rem;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.144);
+    width: 60rem;
+}
+
+.contenedorDiv {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-flow: column;
+    gap: 2rem;
+}
+
+.campo {
+    width: 100%;
+}
+.campo:last-of-type {
+    margin-bottom: 2rem;
+}
+
+.input {
+    border-radius: .3rem;
+    border: none;
+    outline: none;
+    padding: .6rem;
+    background-color: #ececec;
+    color: #353435;
+    font-family: var(--main-font);
+    width: 100%;
+}
+
+
+.boton {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin-top: 2rem;
+}
+
+.btnPrincipal {
+    background-color: #d19c52;
+    border-radius: .3rem;
+    border: none;
+    padding: 1rem 3rem;
+    cursor: pointer;
+    font-family: var(--main-font);
+    transition: all .4s ease;
+    color: #fff;
+    font-weight: 600;
+}
+.btnPrincipal:hover {
+    background-color: #fbc477;
+    color: #000;
+}
+
+.btnVolver {
+    background-color: #d19c52;
+    border-radius: .3rem;
+    margin-top: 1rem;
+    color: #fff;
+    border: none;
+    padding: 1rem 3rem;
+    cursor: pointer;
+    font-family: var(--main-font);
+    transition: all .4s ease;
+    font-weight: 600;
+}
+.btnVolver:hover {
+    background-color: #fbc477;
+    color: var(--second-color);
+}
+
+
 /* Paginas Internas */
 .intrumentos, .usuarios {
     background-color: #fff;
@@ -330,8 +425,17 @@ th {
     object-fit: cover;
 }
 
-.imagen {
+.container-img {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.imagen-tabla {
     padding: .3rem;
+    object-fit: cover;
+    max-width: 300px;
 }
 
 

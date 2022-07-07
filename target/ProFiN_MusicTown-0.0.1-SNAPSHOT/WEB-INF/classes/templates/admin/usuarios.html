@@ -16,21 +16,8 @@
 <body>
     <div class="dashboard">
         
-        <aside th:insert="ThHtmls/partesComunes :: menuAdmin"></aside>
-        <aside class="sidebar" th:fragment="menuAdmin">
-            <div class="contenedor-sidebar">
-                <h2>Music Town</h2>
-
-                <div class="cerrar-menu">
-                    <img src="assets/img/cerrar.svg" alt="img cerrar-menu" id="cerrar-menu">
-                </div>
-            </div>
-
-            <nav class="sidebar-nav">
-                <a href="instrumentos.html">Instrumentos</a>
-                <a href="usuarios.html">Usuarios</a>
-            </nav>
-
+        <aside th:insert="ThHtmls/partesComunes :: menuAdmin">
+     
             <div class="cerrar-sesion-mobile">
                 <a href="/logout" class="cerrar-sesion">Cerrar Sesión</a>
             </div>
@@ -64,24 +51,14 @@
                     </thead>
             
                     <tbody> <!-- Mostrar Resultados  -->
-                        <tr>
-                            <td>123</td>
-                            <td>Juan</td>
-                            <td>juan@guitar.com</td>
+                        <tr th:each="usuario : ${listaUsuarios}">
+                            <td th:text="${usuario.getId()}"></td>
+                            <td th:text="${usuario.getNombre()}">Juan</td>
+                            <td th:text="${usuario.getMail()}">juan@guitar.com</td>
                             <td>
-                                <a href="#" onclick="eliminar()" class="btn elim">Eliminar</a>
-                                <a href="actualizar.html" class="btn act">Actualizar</a>
+                                <a th:href="@{/admin/eliminar/}+${usuario.getId()}" class="btn elim">Eliminar</a>
+                                <a th:href="@{/admin/hacerAdmin/}+${usuario.getId()}" class="btn act">Hacer admin</a>
                             </td>
-                        </tr>
-                        <tr>
-                            <td>123</td>
-                            <td>Pepe</td>
-                            <td>Ppepe@guitar.com</td>
-                            <td>
-                                <a href="#" onclick="eliminar()" class="btn elim">Eliminar</a>
-                                <a href="actualizar.html" class="btn act">Actualizar</a>
-                            </td>
-                        </tr>
                     </tbody>
                 </table>
 
