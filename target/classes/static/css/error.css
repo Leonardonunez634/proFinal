@@ -1,19 +1,18 @@
-
-main{
-    height:90vh;
-    padding-top:20vh;
-    display: grid;
-    grid-template-areas:
-    "img tex tex tex"
-    "img tex tex tex"
-    "link link link link";
-    
-    grid-template-colums:100px auto;
+main {
+    padding-top: 10rem;
 }
-.contenedorIMG{
-    grid-area:img;
-    max-width: 330px;
-    overflow: hidden;
+
+.containerError {  
+    min-height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+}
+.contenedorIMG {
+    display: flex;
+    justify-content: center;
+    align-items: center; 
 }   
 .contenedorIMG img{
     object-fit: cover;
@@ -22,14 +21,26 @@ main{
     grid-area:tex; 
 }
 
-main a{
-    grid-area:link;
-    margin: auto;
-    text-decoration: none;
-    color: var(--second-color);
-    padding: 13px;
+.imagenError {
+    margin: 0;
+    width: 100%;
+    object-fit: cover;
+    max-width: 300px;
+    height: 100%;
 }
-main a:hover{
-  color: rgb(0, 0, 0);
-  background-color: #ffc671;
+
+.btnD {
+    padding: 1rem 2.5rem;
+    background-color: var(--second-color);
+    outline: none;
+    border: none;
+    color: #fff;
+    transition: all .3s linear;
+    border-radius: .2rem;
+    font-family: var(--main-font);
+    font-size: 1.5rem;
+}
+.btnD:hover {
+    background-color: rgb(204, 158, 89);
+    color: black;
 }
